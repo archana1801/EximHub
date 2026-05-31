@@ -90,21 +90,36 @@ export default function About() {
         <div style={S.heroBlobLeft}  aria-hidden="true" />
         <div style={S.heroBlobRight} aria-hidden="true" />
         <div style={S.heroInner}>
-          <span style={S.badge}>
-            <span style={S.badgeDot} />
-            Who We Are
-          </span>
-          <h1 style={S.heroTitle}>
-            About <span style={S.heroAccent}>ImportWiz</span>
-          </h1>
-          <p style={S.heroSub}>
-            Your trusted partner in global sourcing and export solutions — connecting importers with reliable suppliers since 2018.
-          </p>
-          <div style={S.crumbs}>
-            <Link to="/" style={S.crumbLink}>Home</Link>
-            <span style={S.crumbSep}>›</span>
-            <span style={S.crumbActive}>About</span>
+
+          {/* LEFT — text */}
+          <div style={S.heroLeft}>
+            <span style={S.badge}>
+              <span style={S.badgeDot} />
+              Who We Are
+            </span>
+            <h1 style={S.heroTitle}>
+              About <span style={S.heroAccent}>ImportWiz</span>
+            </h1>
+            <p style={S.heroSub}>
+              Your trusted partner in global sourcing and export solutions — connecting importers with reliable suppliers since 2018.
+            </p>
+            <div style={S.crumbs}>
+              <Link to="/" style={S.crumbLink}>Home</Link>
+              <span style={S.crumbSep}>›</span>
+              <span style={S.crumbActive}>About</span>
+            </div>
           </div>
+
+          {/* RIGHT — about image */}
+          <div style={S.heroRight}>
+            <img
+              src="/images/categories/about.png"
+              alt="About ImportWiz"
+              style={S.heroImg}
+              onError={(e) => { e.target.style.display = "none"; }}
+            />
+          </div>
+
         </div>
       </section>
 
@@ -301,10 +316,39 @@ const S = {
     pointerEvents: "none",
   },
   heroInner: {
-    maxWidth: "1160px",
+    maxWidth: "1400px",
     margin: "0 auto",
     position: "relative",
     zIndex: 1,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: "0",
+  },
+
+  heroLeft: {
+    flex: "0 0 540px",
+    maxWidth: "540px",
+    paddingRight: "20px",
+    zIndex: 2,
+  },
+
+  heroRight: {
+    flex: 1,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    marginLeft: "-40px",
+  },
+
+  heroImg: {
+    width: "780px",
+    height: "auto",
+    maxHeight: "560px",
+    objectFit: "contain",
+    display: "block",
+    maskImage: "linear-gradient(to left, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%)",
+    WebkitMaskImage: "linear-gradient(to left, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%)",
   },
   badge: {
     display: "inline-flex",

@@ -11,7 +11,7 @@ const S = {
     minHeight: "100vh",
     flexGrow: 1,
     backgroundImage:
-      "linear-gradient(rgba(6, 22, 46, 0.78), rgba(6, 22, 46, 0.78)), url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?q=80&w=2070&auto=format&fit=crop')",
+      "linear-gradient(rgba(6, 22, 46, 0.72), rgba(6, 22, 46, 0.72)), url('/images/categories/hero-right.jpeg')",
     backgroundSize: "cover",
     backgroundPosition: "center",
     display: "flex",
@@ -145,6 +145,21 @@ const S = {
   right: {
     width: "430px",
     flexShrink: 0,
+    position: "relative",
+  },
+
+  rightBgImg: {
+    position: "absolute",
+    bottom: "-40px",
+    right: "-40px",
+    width: "420px",
+    height: "420px",
+    objectFit: "cover",
+    borderRadius: "20px",
+    opacity: 0.85,
+    zIndex: 0,
+    filter: "none",
+    pointerEvents: "none",
   },
 
   formCard: {
@@ -152,6 +167,8 @@ const S = {
     borderRadius: "14px",
     padding: "30px 28px 26px",
     boxShadow: "0 24px 70px rgba(0,0,0,0.45)",
+    position: "relative",
+    zIndex: 1,
   },
 
   formTitle: {
@@ -311,7 +328,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* ── RIGHT — white form card ── */}
+        {/* ── RIGHT — image + form card ── */}
         <div style={S.right}>
           <div style={S.formCard}>
             <h2 style={S.formTitle}>

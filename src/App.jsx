@@ -6,6 +6,7 @@ import Footer from "./components/common/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Certifications from "./pages/Certifications";
+import CertificationDetails from "./pages/CertificationDetails";
 import Resources from "./pages/Resources";
 
 // Anjali's pages
@@ -21,6 +22,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/certifications" element={<Certifications />} />
+        <Route path="/certifications/:id" element={<CertificationDetails />} />
         <Route path="/resources" element={<Resources />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetails />} />

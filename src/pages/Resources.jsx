@@ -136,21 +136,36 @@ export default function Resources() {
         <div style={S.heroBlobLeft}  aria-hidden="true" />
         <div style={S.heroBlobRight} aria-hidden="true" />
         <div style={S.heroInner}>
-          <span style={S.badge}>
-            <span style={S.badgeDot} />
-            Knowledge Base
-          </span>
-          <h1 style={S.heroTitle}>
-            Resources &amp; <span style={S.heroAccent}>Guides</span>
-          </h1>
-          <p style={S.heroSub}>
-            Everything you need to know about importing, sourcing, and global trade — in one place.
-          </p>
-          <div style={S.crumbs}>
-            <Link to="/" style={S.crumbLink}>Home</Link>
-            <span style={S.crumbSep}>›</span>
-            <span style={S.crumbActive}>Resources</span>
+
+          {/* LEFT */}
+          <div style={S.heroLeft}>
+            <span style={S.badge}>
+              <span style={S.badgeDot} />
+              Knowledge Base
+            </span>
+            <h1 style={S.heroTitle}>
+              Resources &amp; <span style={S.heroAccent}>Guides</span>
+            </h1>
+            <p style={S.heroSub}>
+              Everything you need to know about importing, sourcing, and global trade — in one place.
+            </p>
+            <div style={S.crumbs}>
+              <Link to="/" style={S.crumbLink}>Home</Link>
+              <span style={S.crumbSep}>›</span>
+              <span style={S.crumbActive}>Resources</span>
+            </div>
           </div>
+
+          {/* RIGHT — hero image */}
+          <div style={S.heroRight}>
+            <img
+              src="/images/categories/resourcehero.png"
+              alt="Resources and guides"
+              style={S.heroImg}
+              onError={(e) => { e.target.style.display = "none"; }}
+            />
+          </div>
+
         </div>
       </section>
 
@@ -200,18 +215,44 @@ export default function Resources() {
               Quick answers to the questions importers ask most often.
             </p>
           </div>
-          <div style={S.faqList}>
-            {faqs.map((f, i) => (
-              <div key={i} className="rs-faq" style={S.faqItem}>
-                <div style={S.faqLeft}>
-                  <div style={S.faqNum}>{String(i + 1).padStart(2, "0")}</div>
-                </div>
-                <div style={S.faqBody}>
-                  <h3 style={S.faqQ}>{f.q}</h3>
-                  <p style={S.faqA}>{f.a}</p>
-                </div>
+
+          {/* 2-col: image left + accordion right */}
+          <div style={S.faqLayout}>
+
+            {/* LEFT — question image */}
+            <div style={S.faqImgCol}>
+              <img
+                src="/images/categories/question.png"
+                alt="FAQ"
+                style={S.faqImg}
+                onError={(e) => { e.target.style.display = "none"; }}
+              />
+            </div>
+
+            {/* RIGHT — accordion */}
+            <div style={S.faqRight}>
+              <div style={S.faqList}>
+                {faqs.map((f, i) => (
+                  <div key={i} className="rs-faq" style={S.faqItem}>
+                    <div style={S.faqDot} />
+                    <div style={S.faqBody}>
+                      <h3 style={S.faqQ}>{f.q}</h3>
+                      <p style={S.faqA}>{f.a}</p>
+                    </div>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#CBD5E1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18" style={{ flexShrink: 0 }}>
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
+                  </div>
+                ))}
               </div>
-            ))}
+              <button style={S.viewAllBtn} className="rs-view-all">
+                View All Questions
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="14" height="14">
+                  <line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" />
+                </svg>
+              </button>
+            </div>
+
           </div>
         </div>
       </section>
@@ -302,6 +343,16 @@ export default function Resources() {
         @media (max-width: 560px) {
           .rs-grid { grid-template-columns: 1fr; }
         }
+        .rs-view-all {
+          transition: background 0.22s ease, box-shadow 0.22s ease;
+        }
+        .rs-view-all:hover {
+          background: #178a5e !important;
+          box-shadow: 0 6px 20px rgba(31,169,113,0.3) !important;
+        }
+        @media (max-width: 860px) {
+          .rs-faq-layout { flex-direction: column !important; }
+        }
       `}</style>
     </main>
   );
@@ -335,10 +386,41 @@ const S = {
     pointerEvents: "none",
   },
   heroInner: {
-    maxWidth: "1160px",
+    maxWidth: "1200px",
     margin: "0 auto",
     position: "relative",
     zIndex: 1,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: "48px",
+  },
+
+  heroLeft: {
+    flex: 1,
+    maxWidth: "560px",
+  },
+
+  heroRight: {
+    flexShrink: 0,
+    width: "700px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "relative",
+  },
+
+  heroImg: {
+    width: "100%",
+    height: "auto",
+    maxHeight: "520px",
+    objectFit: "contain",
+    display: "block",
+    opacity: 0.95,
+    maskImage: "linear-gradient(to left, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 100%), linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)",
+    WebkitMaskImage: "linear-gradient(to left, rgba(0,0,0,1) 45%, rgba(0,0,0,0) 100%), linear-gradient(to bottom, rgba(0,0,0,1) 70%, rgba(0,0,0,0) 100%)",
+    maskComposite: "intersect",
+    WebkitMaskComposite: "destination-in",
   },
   badge: {
     display: "inline-flex",
@@ -498,60 +580,104 @@ const S = {
     bottom: "-80px", right: "-80px",
     pointerEvents: "none",
   },
-  faqList: {
+  faqLayout: {
+    display: "flex",
+    alignItems: "stretch",
+    gap: "48px",
+  },
+
+  faqImgCol: {
+    flexShrink: 0,
+    width: "340px",
+    minHeight: "520px",
+    display: "flex",
+    alignItems: "stretch",
+    alignSelf: "stretch",
+  },
+
+  faqImg: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    objectPosition: "center",
+    display: "block",
+    borderRadius: "16px",
+    boxShadow: "0 8px 32px rgba(11,31,58,0.1)",
+  },
+
+  faqRight: {
+    flex: 1,
     display: "flex",
     flexDirection: "column",
     gap: "16px",
-    position: "relative",
-    zIndex: 1,
   },
+
+  faqList: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "0",
+  },
+
   faqItem: {
     display: "flex",
     alignItems: "flex-start",
-    gap: "24px",
-    background: "rgba(255,255,255,0.7)",
-    border: "1px solid rgba(13,27,42,0.07)",
-    borderRadius: "14px",
-    padding: "26px 28px",
-    backdropFilter: "blur(8px)",
-    boxShadow: "0 2px 12px rgba(13,27,42,0.04)",
+    gap: "16px",
+    background: "#ffffff",
+    border: "1px solid #EAECF0",
+    borderRadius: "12px",
+    padding: "18px 20px",
     cursor: "default",
+    marginBottom: "10px",
+    boxShadow: "0 1px 6px rgba(11,31,58,0.05)",
   },
-  faqLeft: {
+
+  faqDot: {
+    width: "8px",
+    height: "8px",
+    borderRadius: "50%",
+    background: "#1FA971",
     flexShrink: 0,
-    paddingTop: "2px",
+    marginTop: "6px",
   },
-  faqNum: {
-    width: "36px", height: "36px",
-    borderRadius: "10px",
-    background: "rgba(31,169,113,0.1)",
-    border: "1px solid rgba(31,169,113,0.25)",
-    color: "#1FA971",
-    fontSize: "12px",
-    fontWeight: "800",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    letterSpacing: "0.3px",
-  },
+
   faqBody: {
     display: "flex",
     flexDirection: "column",
-    gap: "8px",
+    gap: "6px",
+    flex: 1,
   },
+
   faqQ: {
-    fontSize: "15px",
+    fontSize: "14.5px",
     fontWeight: "700",
-    color: "#0D1B2A",
+    color: "#0B1F3A",
     margin: "0",
     letterSpacing: "-0.1px",
     lineHeight: "1.4",
   },
+
   faqA: {
-    fontSize: "14px",
-    color: "rgba(13,27,42,0.55)",
-    lineHeight: "1.8",
+    fontSize: "13.5px",
+    color: "rgba(11,31,58,0.52)",
+    lineHeight: "1.75",
     margin: "0",
+  },
+
+  viewAllBtn: {
+    display: "inline-flex",
+    alignItems: "center",
+    gap: "8px",
+    background: "#1FA971",
+    color: "#ffffff",
+    border: "none",
+    padding: "11px 24px",
+    borderRadius: "8px",
+    fontSize: "13px",
+    fontWeight: "700",
+    cursor: "pointer",
+    alignSelf: "flex-start",
+    fontFamily: "inherit",
+    boxShadow: "0 4px 14px rgba(31,169,113,0.28)",
   },
 
   /* ── SUPPORT CTA ── */

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -22,3 +23,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+=======
+.DS_Store
+Thumbs.db
+*.log
+>>>>>>> bd61a253e317f63bf0b9a3d41e99a1bd65f97ecf

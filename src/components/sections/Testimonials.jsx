@@ -1,69 +1,36 @@
 const reviews = [
   {
     quote:
-      "Reliable supplier network and smooth shipping process. Documentation was handled professionally — no delays at customs. Will definitely continue sourcing through them.",
-    name: "David Chen",
+      "ImportWiz helped us source the right products with complete documentation support. Highly professional and reliable team.",
+    name: "Michael Johnson",
     company: "Global Trade Ltd.",
     role: "Head of Procurement",
     country: "USA",
     flag: "🇺🇸",
-    initials: "DC",
+    initials: "MJ",
     accent: "#1FA971",
   },
   {
     quote:
-      "The private labeling support was excellent. Our brand packaging arrived exactly as designed, and the quality matched the approved samples. Very responsive team.",
-    name: "Fatima Al-Rashidi",
-    company: "Al Rashidi Imports LLC",
+      "Their logistics and customs support is excellent. Our shipments always arrive on time without any issues.",
+    name: "Ahmad Al Mansouri",
+    company: "Al Mansouri Imports",
     role: "Founder & CEO",
     country: "UAE",
     flag: "🇦🇪",
-    initials: "FA",
+    initials: "AA",
     accent: "#0891b2",
   },
   {
     quote:
-      "We have sourced agricultural products for three seasons now. Certifications like APEDA and ISO gave our buyers confidence. Transparent pricing and no hidden charges.",
-    name: "Klaus Reinhardt",
+      "Great experience working with ImportWiz. Transparent pricing and genuine suppliers. Highly recommended!",
+    name: "Sarah Thompson",
     company: "EuroAgri GmbH",
     role: "Operations Director",
-    country: "Germany",
-    flag: "🇩🇪",
-    initials: "KR",
+    country: "UK",
+    flag: "🇬🇧",
+    initials: "ST",
     accent: "#7C3AED",
-  },
-  {
-    quote:
-      "Customs clearance used to be the biggest bottleneck for us. Their compliance team handled everything end-to-end. Shipments now arrive on schedule, every time.",
-    name: "Priya Subramaniam",
-    company: "Meridian Retail Group",
-    role: "Supply Chain Manager",
-    country: "Singapore",
-    flag: "🇸🇬",
-    initials: "PS",
-    accent: "#D97706",
-  },
-  {
-    quote:
-      "From sample approval to final delivery, the process was completely transparent. Real-time tracking gave our logistics team full visibility across all consignments.",
-    name: "James Okonkwo",
-    company: "Lagos Trade Hub",
-    role: "Import Coordinator",
-    country: "Nigeria",
-    flag: "🇳🇬",
-    initials: "JO",
-    accent: "#059669",
-  },
-  {
-    quote:
-      "The flexible MOQ options allowed us to test new product lines without over-committing inventory. Great communication at every step. A trustworthy long-term partner.",
-    name: "Sophie Moreau",
-    company: "Maison Moreau S.A.S.",
-    role: "Purchasing Manager",
-    country: "France",
-    flag: "🇫🇷",
-    initials: "SM",
-    accent: "#2563EB",
   },
 ];
 
@@ -102,7 +69,7 @@ export default function Testimonials() {
             <span style={S.badgeDot} />
             Client Stories
           </span>
-          <h2 style={S.heading}>Trusted by Importers Worldwide</h2>
+          <h2 style={S.heading}>What Our Importers Say</h2>
           <p style={S.subtext}>
             Businesses across multiple countries rely on our sourcing and logistics expertise.
           </p>
@@ -165,11 +132,12 @@ export default function Testimonials() {
           gap: 26px;
         }
         .tm-card {
-          transition: transform 0.3s cubic-bezier(.22,.68,0,1.2), box-shadow 0.3s ease;
+          transition: transform 0.3s cubic-bezier(.22,.68,0,1.2), box-shadow 0.3s ease, border-color 0.3s ease;
         }
         .tm-card:hover {
           transform: translateY(-7px);
-          box-shadow: 0 20px 56px rgba(10,20,40,0.13), 0 4px 12px rgba(10,20,40,0.07) !important;
+          border-color: rgba(31,169,113,0.45) !important;
+          box-shadow: 0 20px 56px rgba(10,20,40,0.13), 0 4px 12px rgba(10,20,40,0.07), 0 0 0 1px rgba(31,169,113,0.2) !important;
         }
         @media (max-width: 960px) {
           .tm-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
@@ -186,7 +154,7 @@ const S = {
   section: {
     position: "relative",
     background: "linear-gradient(160deg, #F5F7FA 0%, #F8FAFB 50%, #F2F5F9 100%)",
-    padding: "110px 60px",
+    padding: "60px 60px",
     overflow: "hidden",
   },
 
@@ -269,7 +237,7 @@ const S = {
   card: {
     background: "#ffffff",
     borderRadius: "16px",
-    border: "1px solid rgba(13,27,42,0.07)",
+    border: "1.5px solid rgba(31,169,113,0.15)",
     padding: "30px 26px 26px",
     display: "flex",
     flexDirection: "column",
