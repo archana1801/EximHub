@@ -12,6 +12,7 @@ import Resources from "./pages/Resources";
 // Anjali's pages
 import Products from "./pages/Products";
 import ProductDetails from "./pages/ProductDetails";
+import RequestQuote from "./pages/RequestQuote";
 import Contact from "./pages/Contact";
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route path="/resources" element={<Resources />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetails />} />
+        <Route path="/request-quote" element={<RequestQuote />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
       <Footer />
