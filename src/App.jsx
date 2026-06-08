@@ -8,6 +8,7 @@ import About from "./pages/About";
 import Certifications from "./pages/Certifications";
 import CertificationDetails from "./pages/CertificationDetails";
 import Resources from "./pages/Resources";
+import ResourceDetail from "./pages/ResourceDetail";
 
 // Anjali's pages
 import Products from "./pages/Products";
@@ -25,6 +26,7 @@ function App() {
         <Route path="/certifications" element={<Certifications />} />
         <Route path="/certifications/:id" element={<CertificationDetails />} />
         <Route path="/resources" element={<Resources />} />
+        <Route path="/resources/:id" element={<ResourceDetail />} />
         <Route path="/products" element={<Products />} />
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/request-quote" element={<RequestQuote />} />

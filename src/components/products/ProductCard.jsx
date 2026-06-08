@@ -75,12 +75,15 @@ export default function ProductCard({ product, selected, onToggleSelect }) {
             alt={product.name}
             loading="lazy"
             style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            onError={e => {
+              e.target.style.display = 'none';
+              e.target.nextSibling.style.display = 'flex';
+            }}
           />
-        ) : (
-          <div style={{ position: 'absolute', inset: 0, background: fallback.bg, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '52px' }}>
-            {fallback.icon}
-          </div>
-        )}
+        ) : null}
+        <div style={{ position: 'absolute', inset: 0, background: fallback.bg, display: product.image ? 'none' : 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '52px' }}>
+          {fallback.icon}
+        </div>
 
         {/* Checkbox for batch RFQ */}
         <button

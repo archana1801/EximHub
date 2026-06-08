@@ -76,36 +76,38 @@ export default function About() {
     <main style={{ width: "100%" }}>
 
       {/* ── 1. HERO ─────────────────────────────────────────────── */}
-      <section style={S.hero} className="ab-hero">
-        <div style={S.heroBlobLeft} />
-        <div style={S.heroBlobRight} />
-        <div style={S.heroInner} className="ab-hero-inner">
-
-          <div style={S.heroLeft} className="ab-hero-left">
-            <span style={S.badge}>
-              <span style={S.badgeDot} />
-              Who We Are
-            </span>
-            <h1 style={S.heroTitle}>
-              About <span style={{ color: "#1FA971" }}>ImportWiz</span>
+      <section className="ab-hero" style={{ background: '#0B1F3A', position: 'relative', overflow: 'hidden', color: '#fff' }}>
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1px)', backgroundSize: '22px 22px', pointerEvents: 'none' }} />
+        <div className="ab-img-wrap" style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '52%', zIndex: 0 }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, #0B1F3A 0%, rgba(11,31,58,0.55) 35%, transparent 70%)', zIndex: 1 }} />
+          <img src="/images/categories/about.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        </div>
+        <div className="ab-hero-content" style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 60px', position: 'relative', zIndex: 1 }}>
+          <div style={{ maxWidth: '520px', padding: '52px 0 40px' }}>
+            <h1 style={{ fontSize: 'clamp(22px, 2.6vw, 38px)', fontWeight: '800', lineHeight: '1.18', margin: '0 0 14px', letterSpacing: '-0.3px', color: '#fff' }}>
+              About<br />
+              <span style={{ color: '#1FA971' }}>ImportWiz</span>
             </h1>
-            <p style={S.heroSub}>
+            <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.62)', margin: '0 0 32px', lineHeight: '1.75', maxWidth: '400px' }}>
               Your trusted partner in global sourcing and export solutions — connecting importers with reliable suppliers since 2018.
             </p>
-            <nav style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "13px" }}>
-              <Link to="/" style={{ color: "#1FA971", textDecoration: "none", fontWeight: "500" }}>Home</Link>
-              <span style={{ color: "rgba(13,27,42,0.3)", fontSize: "15px" }}>›</span>
-              <span style={{ color: "rgba(13,27,42,0.45)", fontWeight: "500" }}>About</span>
-            </nav>
-          </div>
-
-          <div style={S.heroRight} className="ab-hero-right">
-            <img
-              src="/images/categories/about.png"
-              alt="About ImportWiz"
-              style={S.heroImg}
-              onError={e => { e.target.style.display = "none"; }}
-            />
+            <div className="ab-hero-stats" style={{ display: 'flex', gap: '28px', flexWrap: 'wrap' }}>
+              {[
+                { value: '2018', label: 'Founded', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1FA971" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> },
+                { value: '1,200+', label: 'Verified Suppliers', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1FA971" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg> },
+                { value: '40+', label: 'Countries Served', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1FA971" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> },
+              ].map(s => (
+                <div key={s.label} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{ width: '36px', height: '36px', borderRadius: '8px', flexShrink: 0, background: 'rgba(31,169,113,0.12)', border: '1px solid rgba(31,169,113,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    {s.icon}
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '17px', fontWeight: '800', color: '#fff', lineHeight: '1.1' }}>{s.value}</div>
+                    <div style={{ fontSize: '10.5px', color: 'rgba(255,255,255,0.45)', textTransform: 'uppercase', letterSpacing: '0.6px', marginTop: '1px' }}>{s.label}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -314,10 +316,10 @@ export default function About() {
           .ab-container { padding: 0 32px !important; }
         }
         @media (max-width: 768px) {
-          .ab-hero { padding: 48px 20px 40px !important; }
-          .ab-hero-inner { flex-direction: column !important; gap: 24px !important; }
-          .ab-hero-left { flex: none !important; max-width: 100% !important; padding-right: 0 !important; }
-          .ab-hero-right { display: none !important; }
+          .ab-img-wrap { display: none !important; }
+          .ab-hero-content { padding: 0 20px !important; }
+          .ab-hero-content > div { padding: 36px 0 28px !important; max-width: 100% !important; }
+          .ab-hero-stats { gap: 16px !important; }
           .ab-container { padding: 0 20px !important; }
           .ab-stats-inner { padding: 0 20px !important; flex-wrap: wrap !important; gap: 0 !important; }
           .ab-overview-grid { flex-direction: column !important; gap: 32px !important; }
@@ -331,7 +333,7 @@ export default function About() {
           .ab-steps-grid { grid-template-columns: 1fr; }
         }
         @media (max-width: 480px) {
-          .ab-hero { padding: 36px 16px 32px !important; }
+          .ab-hero-content { padding: 0 16px !important; }
           .ab-container { padding: 0 16px !important; }
           .ab-cta-section { padding: 48px 16px !important; }
         }

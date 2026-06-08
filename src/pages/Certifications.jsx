@@ -95,48 +95,38 @@ export default function CertificationsPage() {
     <main style={S.main}>
 
       {/* ── HERO ── */}
-      <section style={S.hero} className="cp-hero">
-        <div style={S.dotGrid} aria-hidden="true" />
-
-        <div style={S.heroInner} className="cp-hero-inner">
-          {/* LEFT */}
-          <div style={S.heroLeft} className="cp-hero-left">
-            <span style={S.heroBadge}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="#1FA971" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="14" height="14">
-                <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z" />
-                <polyline points="9 12 11 14 15 10" />
-              </svg>
-              Compliance &amp; Standards
-            </span>
-
-            <h1 style={S.heroTitle}>
+      <section className="cp-hero" style={{ background: '#0B1F3A', position: 'relative', overflow: 'hidden', color: '#fff' }}>
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1px)', backgroundSize: '22px 22px', pointerEvents: 'none' }} />
+        <div className="cp-img-wrap" style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '52%', zIndex: 0 }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, #0B1F3A 0%, rgba(11,31,58,0.55) 35%, transparent 70%)', zIndex: 1 }} />
+          <img src="/images/categories/iso.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        </div>
+        <div className="cp-hero-content" style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 60px', position: 'relative', zIndex: 1 }}>
+          <div style={{ maxWidth: '520px', padding: '52px 0 40px' }}>
+            <h1 style={{ fontSize: 'clamp(22px, 2.6vw, 38px)', fontWeight: '800', lineHeight: '1.18', margin: '0 0 14px', letterSpacing: '-0.3px', color: '#fff' }}>
               Certifications &amp;<br />
-              <span style={S.heroTitleGreen}>Compliance</span>
+              <span style={{ color: '#1FA971' }}>Compliance</span>
             </h1>
-
-            <p style={S.heroSub}>
+            <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.62)', margin: '0 0 32px', lineHeight: '1.75', maxWidth: '400px' }}>
               We adhere to international quality standards and export regulations to ensure reliable global trade.
             </p>
-
-            <div style={S.heroCrumbs}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="#1FA971" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="14" height="14">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                <polyline points="9 22 9 12 15 12 15 22" />
-              </svg>
-              <Link to="/" style={S.crumbLink}>Home</Link>
-              <span style={S.crumbSep}>›</span>
-              <span style={S.crumbActive}>Certifications</span>
+            <div className="cp-hero-stats" style={{ display: 'flex', gap: '28px', flexWrap: 'wrap' }}>
+              {[
+                { value: '6+', label: 'Certifications', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1FA971" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z"/><polyline points="9 12 11 14 15 10"/></svg> },
+                { value: '25+', label: 'Countries Compliant', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1FA971" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> },
+                { value: 'ISO', label: '9001:2015 Certified', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1FA971" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> },
+              ].map(s => (
+                <div key={s.label} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{ width: '36px', height: '36px', borderRadius: '8px', flexShrink: 0, background: 'rgba(31,169,113,0.12)', border: '1px solid rgba(31,169,113,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    {s.icon}
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '17px', fontWeight: '800', color: '#fff', lineHeight: '1.1' }}>{s.value}</div>
+                    <div style={{ fontSize: '10.5px', color: 'rgba(255,255,255,0.45)', textTransform: 'uppercase', letterSpacing: '0.6px', marginTop: '1px' }}>{s.label}</div>
+                  </div>
+                </div>
+              ))}
             </div>
-          </div>
-
-          {/* RIGHT — hero image */}
-          <div style={S.heroRight} className="cp-hero-right">
-            <img
-              src="/images/categories/hero1.png"
-              alt="Certifications"
-              style={S.heroImg}
-              onError={(e) => { e.target.style.display = "none"; }}
-            />
           </div>
         </div>
       </section>
@@ -313,10 +303,10 @@ export default function CertificationsPage() {
         @media (max-width: 640px) { .cp-doc-grid { grid-template-columns: 1fr; } }
 
         @media (max-width: 768px) {
-          .cp-hero { padding: 40px 20px !important; min-height: auto !important; }
-          .cp-hero-inner { flex-direction: column !important; }
-          .cp-hero-left { flex: none !important; max-width: 100% !important; padding-right: 0 !important; }
-          .cp-hero-right { display: none !important; }
+          .cp-img-wrap { display: none !important; }
+          .cp-hero-content { padding: 0 20px !important; }
+          .cp-hero-content > div { padding: 36px 0 28px !important; max-width: 100% !important; }
+          .cp-hero-stats { gap: 16px !important; }
           .cp-container { padding: 0 20px !important; }
           .cp-section-pad { padding: 48px 20px !important; }
           .cp-doc-section-pad { padding: 48px 20px !important; }
@@ -324,7 +314,7 @@ export default function CertificationsPage() {
           .cp-cta-pad { padding: 60px 20px !important; }
         }
         @media (max-width: 480px) {
-          .cp-hero { padding: 32px 16px !important; }
+          .cp-hero-content { padding: 0 16px !important; }
           .cp-container { padding: 0 16px !important; }
           .cp-section-pad { padding: 40px 16px !important; }
           .cp-doc-section-pad { padding: 40px 16px !important; }

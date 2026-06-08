@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 
 const guides = [
   {
+    id: "import-process-guide",
+    img: "/images/categories/import.jpg",
     color: "#1FA971",
     bg: "rgba(31,169,113,0.08)",
     border: "rgba(31,169,113,0.22)",
@@ -18,6 +20,8 @@ const guides = [
     ),
   },
   {
+    id: "reliable-suppliers",
+    img: "/images/categories/reliablesupplier.jpg",
     color: "#0891b2",
     bg: "rgba(8,145,178,0.08)",
     border: "rgba(8,145,178,0.22)",
@@ -35,6 +39,8 @@ const guides = [
     ),
   },
   {
+    id: "export-documentation",
+    img: "/images/categories/exportdocumentation.jpg",
     color: "#7C3AED",
     bg: "rgba(124,58,237,0.08)",
     border: "rgba(124,58,237,0.22)",
@@ -53,6 +59,8 @@ const guides = [
     ),
   },
   {
+    id: "shipping-logistics",
+    img: "/images/categories/shippingandlogistic.jpg",
     color: "#D97706",
     bg: "rgba(217,119,6,0.08)",
     border: "rgba(217,119,6,0.22)",
@@ -71,6 +79,8 @@ const guides = [
     ),
   },
   {
+    id: "private-label",
+    img: "/images/categories/privatelabeling.jpg",
     color: "#059669",
     bg: "rgba(5,150,105,0.08)",
     border: "rgba(5,150,105,0.22)",
@@ -87,6 +97,8 @@ const guides = [
     ),
   },
   {
+    id: "customs-compliance",
+    img: "/images/categories/customer.jpg",
     color: "#2563EB",
     bg: "rgba(37,99,235,0.08)",
     border: "rgba(37,99,235,0.22)",
@@ -132,40 +144,39 @@ export default function Resources() {
     <main style={S.main}>
 
       {/* ── 1. HERO ── */}
-      <section style={S.hero} className="rs-hero">
-        <div style={S.heroBlobLeft}  aria-hidden="true" />
-        <div style={S.heroBlobRight} aria-hidden="true" />
-        <div style={S.heroInner} className="rs-hero-inner">
-
-          {/* LEFT */}
-          <div style={S.heroLeft} className="rs-hero-left">
-            <span style={S.badge}>
-              <span style={S.badgeDot} />
-              Knowledge Base
-            </span>
-            <h1 style={S.heroTitle}>
-              Resources &amp; <span style={S.heroAccent}>Guides</span>
+      <section className="rs-hero" style={{ background: '#0B1F3A', position: 'relative', overflow: 'hidden', color: '#fff' }}>
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1px)', backgroundSize: '22px 22px', pointerEvents: 'none' }} />
+        <div className="rs-img-wrap" style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '52%', zIndex: 0 }}>
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, #0B1F3A 0%, rgba(11,31,58,0.55) 35%, transparent 70%)', zIndex: 1 }} />
+          <img src="/images/categories/resourcehero.png" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        </div>
+        <div className="rs-hero-content" style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 60px', position: 'relative', zIndex: 1 }}>
+          <div style={{ maxWidth: '520px', padding: '52px 0 40px' }}>
+            <h1 style={{ fontSize: 'clamp(22px, 2.6vw, 38px)', fontWeight: '800', lineHeight: '1.18', margin: '0 0 14px', letterSpacing: '-0.3px', color: '#fff' }}>
+              Resources &amp;<br />
+              <span style={{ color: '#1FA971' }}>Guides</span>
             </h1>
-            <p style={S.heroSub}>
+            <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.62)', margin: '0 0 32px', lineHeight: '1.75', maxWidth: '400px' }}>
               Everything you need to know about importing, sourcing, and global trade — in one place.
             </p>
-            <div style={S.crumbs}>
-              <Link to="/" style={S.crumbLink}>Home</Link>
-              <span style={S.crumbSep}>›</span>
-              <span style={S.crumbActive}>Resources</span>
+            <div className="rs-hero-stats" style={{ display: 'flex', gap: '28px', flexWrap: 'wrap' }}>
+              {[
+                { value: '6+', label: 'Trade Guides', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1FA971" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg> },
+                { value: '500+', label: 'Products Covered', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1FA971" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg> },
+                { value: '25+', label: 'Countries Served', icon: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1FA971" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> },
+              ].map(s => (
+                <div key={s.label} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <div style={{ width: '36px', height: '36px', borderRadius: '8px', flexShrink: 0, background: 'rgba(31,169,113,0.12)', border: '1px solid rgba(31,169,113,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    {s.icon}
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '17px', fontWeight: '800', color: '#fff', lineHeight: '1.1' }}>{s.value}</div>
+                    <div style={{ fontSize: '10.5px', color: 'rgba(255,255,255,0.45)', textTransform: 'uppercase', letterSpacing: '0.6px', marginTop: '1px' }}>{s.label}</div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-
-          {/* RIGHT — hero image */}
-          <div style={S.heroRight} className="rs-hero-right">
-            <img
-              src="/images/categories/resourcehero.png"
-              alt="Resources and guides"
-              style={S.heroImg}
-              onError={(e) => { e.target.style.display = "none"; }}
-            />
-          </div>
-
         </div>
       </section>
 
@@ -181,23 +192,29 @@ export default function Resources() {
           <div className="rs-grid">
             {guides.map((g, i) => (
               <div key={i} className="rs-card" style={S.card}>
-                <div style={S.cardTop}>
-                  <div style={{ ...S.iconBox, background: g.bg, border: `1px solid ${g.border}`, color: g.color }}>
-                    {g.icon}
-                  </div>
-                  <span style={{ ...S.cardTag, color: g.color, background: g.tagBg, border: `1px solid ${g.tagBorder}` }}>
-                    {g.tag}
-                  </span>
+                <div style={S.cardImgWrap} className="rs-card-img">
+                  <img src={g.img} alt={g.title} style={S.cardImg} onError={e => { e.target.style.display = 'none'; }} />
+                  <div style={{ ...S.cardImgOverlay, background: `linear-gradient(to bottom, transparent 40%, ${g.color}22 100%)` }} />
                 </div>
-                <h3 style={S.cardTitle}>{g.title}</h3>
-                <p style={S.cardDesc}>{g.desc}</p>
-                <button style={{ ...S.learnBtn, color: g.color, borderColor: g.border }} className="rs-learn-btn">
-                  Learn More
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="13" height="13">
-                    <line x1="5" y1="12" x2="19" y2="12" />
-                    <polyline points="12 5 19 12 12 19" />
-                  </svg>
-                </button>
+                <div style={S.cardBody}>
+                  <div style={S.cardTop}>
+                    <div style={{ ...S.iconBox, background: g.bg, border: `1px solid ${g.border}`, color: g.color }}>
+                      {g.icon}
+                    </div>
+                    <span style={{ ...S.cardTag, color: g.color, background: g.tagBg, border: `1px solid ${g.tagBorder}` }}>
+                      {g.tag}
+                    </span>
+                  </div>
+                  <h3 style={S.cardTitle}>{g.title}</h3>
+                  <p style={S.cardDesc}>{g.desc}</p>
+                  <Link to={`/resources/${g.id}`} style={{ ...S.learnBtn, color: g.color, borderColor: g.border, textDecoration: 'none' }} className="rs-learn-btn">
+                    Learn More
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="13" height="13">
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <polyline points="12 5 19 12 12 19" />
+                    </svg>
+                  </Link>
+                </div>
               </div>
             ))}
           </div>
@@ -308,6 +325,9 @@ export default function Resources() {
           transform: translateY(-7px);
           box-shadow: 0 20px 48px rgba(13,27,42,0.11), 0 4px 12px rgba(13,27,42,0.05) !important;
         }
+        .rs-card:hover .rs-card-img img {
+          transform: scale(1.07);
+        }
         .rs-learn-btn {
           transition: background 0.2s ease, color 0.2s ease;
           cursor: pointer;
@@ -355,17 +375,17 @@ export default function Resources() {
           .rs-faq-img-col { display: none !important; }
         }
         @media (max-width: 768px) {
-          .rs-hero { padding: 48px 20px 40px !important; }
-          .rs-hero-inner { flex-direction: column !important; gap: 24px !important; }
-          .rs-hero-left { flex: none !important; max-width: 100% !important; }
-          .rs-hero-right { display: none !important; }
+          .rs-img-wrap { display: none !important; }
+          .rs-hero-content { padding: 0 20px !important; }
+          .rs-hero-content > div { padding: 36px 0 28px !important; max-width: 100% !important; }
+          .rs-hero-stats { gap: 16px !important; }
           .rs-container { padding: 0 20px !important; }
           .rs-cards-section { padding: 52px 20px !important; }
           .rs-faq-section { padding: 52px 20px !important; }
           .rs-cta-section { padding: 60px 20px !important; }
         }
         @media (max-width: 480px) {
-          .rs-hero { padding: 36px 16px 32px !important; }
+          .rs-hero-content { padding: 0 16px !important; }
           .rs-container { padding: 0 16px !important; }
           .rs-cards-section { padding: 40px 16px !important; }
           .rs-faq-section { padding: 40px 16px !important; }
@@ -516,12 +536,37 @@ const S = {
     background: "#ffffff",
     border: "1px solid rgba(13,27,42,0.08)",
     borderRadius: "16px",
-    padding: "26px 22px 22px",
+    overflow: "hidden",
+    display: "flex",
+    flexDirection: "column",
+    cursor: "default",
+    boxShadow: "0 4px 20px rgba(13,27,42,0.06), 0 1px 4px rgba(13,27,42,0.03)",
+  },
+  cardImgWrap: {
+    position: "relative",
+    width: "100%",
+    height: "180px",
+    overflow: "hidden",
+    flexShrink: 0,
+  },
+  cardImg: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    display: "block",
+    transition: "transform 0.4s ease",
+  },
+  cardImgOverlay: {
+    position: "absolute",
+    inset: 0,
+    pointerEvents: "none",
+  },
+  cardBody: {
+    padding: "20px 22px 22px",
     display: "flex",
     flexDirection: "column",
     gap: "12px",
-    cursor: "default",
-    boxShadow: "0 4px 20px rgba(13,27,42,0.06), 0 1px 4px rgba(13,27,42,0.03)",
+    flexGrow: 1,
   },
   cardTop: {
     display: "flex",
