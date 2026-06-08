@@ -76,7 +76,7 @@ const certs = [
 
 export default function Certifications() {
   return (
-    <section style={S.section}>
+    <section style={S.section} className="cert-section">
       <div style={S.container}>
 
         {/* ── heading row ── */}
@@ -157,6 +157,11 @@ export default function Certifications() {
         }
         @media (max-width: 580px) {
           .cert-grid { grid-template-columns: repeat(2, 1fr); }
+          .cert-section { padding: 52px 20px !important; }
+        }
+        @media (max-width: 480px) {
+          .cert-grid { grid-template-columns: 1fr; }
+          .cert-section { padding: 40px 16px !important; }
         }
       `}</style>
     </section>

@@ -81,7 +81,7 @@ const steps = [
 
 export default function PrivateLabel() {
   return (
-    <section style={S.section}>
+    <section style={S.section} className="pl-section">
 
       {/* subtle background blobs */}
       <div style={S.blobTopRight} aria-hidden="true" />
@@ -192,6 +192,10 @@ export default function PrivateLabel() {
           .pl-layout { flex-direction: column !important; }
           .pl-left   { max-width: 100% !important; }
           .pl-right  { width: 100% !important; }
+          .pl-section { padding: 64px 24px !important; }
+        }
+        @media (max-width: 480px) {
+          .pl-section { padding: 48px 16px !important; }
         }
       `}</style>
     </section>

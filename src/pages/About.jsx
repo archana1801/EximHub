@@ -76,12 +76,12 @@ export default function About() {
     <main style={{ width: "100%" }}>
 
       {/* ── 1. HERO ─────────────────────────────────────────────── */}
-      <section style={S.hero}>
+      <section style={S.hero} className="ab-hero">
         <div style={S.heroBlobLeft} />
         <div style={S.heroBlobRight} />
-        <div style={S.heroInner}>
+        <div style={S.heroInner} className="ab-hero-inner">
 
-          <div style={S.heroLeft}>
+          <div style={S.heroLeft} className="ab-hero-left">
             <span style={S.badge}>
               <span style={S.badgeDot} />
               Who We Are
@@ -99,7 +99,7 @@ export default function About() {
             </nav>
           </div>
 
-          <div style={S.heroRight}>
+          <div style={S.heroRight} className="ab-hero-right">
             <img
               src="/images/categories/about.png"
               alt="About ImportWiz"
@@ -112,7 +112,7 @@ export default function About() {
 
       {/* ── 2. STATS TICKER ─────────────────────────────────────── */}
       <div style={S.statsTicker}>
-        <div style={S.statsTickerInner}>
+        <div style={S.statsTickerInner} className="ab-stats-inner">
           {stats.map((s, i) => (
             <div key={i} style={S.tickerItem}>
               <span style={S.tickerNum}>{s.num}</span>
@@ -125,8 +125,8 @@ export default function About() {
 
       {/* ── 3. OUR STORY ────────────────────────────────────────── */}
       <section style={S.overview}>
-        <div style={S.container}>
-          <div style={S.overviewGrid}>
+        <div style={S.container} className="ab-container">
+          <div style={S.overviewGrid} className="ab-overview-grid">
 
             <div style={S.overviewLeft}>
               <p style={S.sectionLabel}>Our Story</p>
@@ -148,7 +148,7 @@ export default function About() {
             </div>
 
             {/* Visual card */}
-            <div style={S.storyCard}>
+            <div style={S.storyCard} className="ab-story-card">
               <div style={S.storyCardTop}>
                 <div style={S.storyYear}>Est. 2018</div>
                 <p style={{ margin: 0, fontSize: "14px", color: "rgba(255,255,255,0.7)", lineHeight: "1.7" }}>
@@ -176,7 +176,7 @@ export default function About() {
 
       {/* ── 4. HOW WE WORK ──────────────────────────────────────── */}
       <section style={S.processSection}>
-        <div style={S.container}>
+        <div style={S.container} className="ab-container">
           <div style={S.sectionHead}>
             <p style={S.sectionLabel}>Our Process</p>
             <h2 style={S.sectionTitle}>How We Work</h2>
@@ -207,7 +207,7 @@ export default function About() {
 
       {/* ── 5. WHY CHOOSE US ────────────────────────────────────── */}
       <section style={S.whySection}>
-        <div style={S.container}>
+        <div style={S.container} className="ab-container">
           <div style={S.sectionHead}>
             <p style={S.sectionLabel}>Why ImportWiz</p>
             <h2 style={S.sectionTitle}>Why Clients Choose Us</h2>
@@ -232,8 +232,8 @@ export default function About() {
       <section style={S.missionSection}>
         <div style={S.missionBlobLeft} />
         <div style={S.missionBlobRight} />
-        <div style={S.container}>
-          <div style={S.missionGrid}>
+        <div style={S.container} className="ab-container">
+          <div style={S.missionGrid} className="ab-mission-grid">
 
             <div style={S.missionLeft}>
               <span style={S.sectionLabel}>Our Mission</span>
@@ -245,7 +245,7 @@ export default function About() {
               </p>
             </div>
 
-            <div style={{ flex: "0 0 360px", display: "flex", flexDirection: "column" }}>
+            <div style={{ flex: "0 0 360px", display: "flex", flexDirection: "column" }} className="ab-mission-right">
               {values.map((v, i) => (
                 <div key={i} style={{ ...S.valueItem, borderBottom: i < values.length - 1 ? "1px solid rgba(13,27,42,0.07)" : "none" }}>
                   <div style={{ width: "4px", height: "44px", borderRadius: "4px", flexShrink: 0, marginTop: "2px", background: v.color }} />
@@ -263,7 +263,7 @@ export default function About() {
 
 
       {/* ── 8. CTA ──────────────────────────────────────────────── */}
-      <section style={S.ctaSection}>
+      <section style={S.ctaSection} className="ab-cta-section">
         <div style={S.ctaBlobLeft} />
         <div style={S.ctaBlobRight} />
         <div style={S.ctaInner}>
@@ -311,10 +311,29 @@ export default function About() {
           .ab-why-grid   { grid-template-columns: repeat(2,1fr); }
           .ab-steps-grid { grid-template-columns: repeat(2,1fr); }
           .ab-step-connector { display: none; }
+          .ab-container { padding: 0 32px !important; }
+        }
+        @media (max-width: 768px) {
+          .ab-hero { padding: 48px 20px 40px !important; }
+          .ab-hero-inner { flex-direction: column !important; gap: 24px !important; }
+          .ab-hero-left { flex: none !important; max-width: 100% !important; padding-right: 0 !important; }
+          .ab-hero-right { display: none !important; }
+          .ab-container { padding: 0 20px !important; }
+          .ab-stats-inner { padding: 0 20px !important; flex-wrap: wrap !important; gap: 0 !important; }
+          .ab-overview-grid { flex-direction: column !important; gap: 32px !important; }
+          .ab-story-card { width: 100% !important; }
+          .ab-mission-grid { flex-direction: column !important; gap: 32px !important; }
+          .ab-mission-right { flex: none !important; width: 100% !important; }
+          .ab-cta-section { padding: 60px 20px !important; }
         }
         @media (max-width: 600px) {
           .ab-why-grid  { grid-template-columns: 1fr; }
           .ab-steps-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+          .ab-hero { padding: 36px 16px 32px !important; }
+          .ab-container { padding: 0 16px !important; }
+          .ab-cta-section { padding: 48px 16px !important; }
         }
       `}</style>
     </main>

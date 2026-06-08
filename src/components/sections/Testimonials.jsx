@@ -55,7 +55,7 @@ const StarRow = () => (
 
 export default function Testimonials() {
   return (
-    <section style={S.section}>
+    <section style={S.section} className="tm-section">
 
       {/* subtle bg blobs */}
       <div style={S.blobLeft}  aria-hidden="true" />
@@ -144,6 +144,10 @@ export default function Testimonials() {
         }
         @media (max-width: 580px) {
           .tm-grid { grid-template-columns: 1fr; gap: 16px; }
+          .tm-section { padding: 52px 20px !important; }
+        }
+        @media (max-width: 480px) {
+          .tm-section { padding: 40px 16px !important; }
         }
       `}</style>
     </section>

@@ -26,42 +26,27 @@ function ProductsHero({ onBrowse }) {
       {/* Subtle dot grid */}
       <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1px)', backgroundSize: '22px 22px', pointerEvents: 'none' }} />
 
-      {/* Right image — absolutely positioned, bleeds to edge */}
-      <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '52%', zIndex: 0 }}>
-        {/* Gradient fade into dark bg */}
+      {/* Right image */}
+      <div className="ph-img-wrap" style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '52%', zIndex: 0 }}>
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, #0B1F3A 0%, rgba(11,31,58,0.55) 35%, transparent 70%)', zIndex: 1 }} />
-        <img
-          src="/images/categories/spices.jpg"
-          alt=""
-          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-        />
+        <img src="/images/categories/spices.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
       </div>
 
       {/* Left content */}
-      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 32px', position: 'relative', zIndex: 1 }}>
+      <div className="ph-content" style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 32px', position: 'relative', zIndex: 1 }}>
         <div style={{ maxWidth: '520px', padding: '52px 0 40px' }}>
-
-          {/* Heading */}
-          <h1 style={{ fontSize: 'clamp(24px, 2.6vw, 38px)', fontWeight: '800', lineHeight: '1.18', margin: '0 0 14px', letterSpacing: '-0.3px', color: '#fff' }}>
+          <h1 style={{ fontSize: 'clamp(22px, 2.6vw, 38px)', fontWeight: '800', lineHeight: '1.18', margin: '0 0 14px', letterSpacing: '-0.3px', color: '#fff' }}>
             Global Products.<br />
             Verified Suppliers.<br />
             <span style={{ color: '#1FA971' }}>Import Simplified.</span>
           </h1>
-
-          {/* Subtext */}
           <p style={{ fontSize: '14px', color: 'rgba(255,255,255,0.62)', margin: '0 0 32px', lineHeight: '1.75', maxWidth: '400px' }}>
             Explore 500+ export-ready products across multiple categories. Sourced from verified suppliers and delivered worldwide.
           </p>
-
-          {/* Stats */}
-          <div style={{ display: 'flex', gap: '28px', flexWrap: 'wrap' }}>
+          <div className="ph-stats" style={{ display: 'flex', gap: '28px', flexWrap: 'wrap' }}>
             {HERO_STATS.map(s => (
               <div key={s.label} style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                <div style={{
-                  width: '36px', height: '36px', borderRadius: '8px', flexShrink: 0,
-                  background: 'rgba(31,169,113,0.12)', border: '1px solid rgba(31,169,113,0.25)',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                }}>
+                <div style={{ width: '36px', height: '36px', borderRadius: '8px', flexShrink: 0, background: 'rgba(31,169,113,0.12)', border: '1px solid rgba(31,169,113,0.25)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   {s.icon}
                 </div>
                 <div>
@@ -71,14 +56,13 @@ function ProductsHero({ onBrowse }) {
               </div>
             ))}
           </div>
-
         </div>
       </div>
     </div>
   );
 }
 
-const ITEMS_PER_PAGE = 8;
+const ITEMS_PER_PAGE = 20;
 
 
 // ── Pagination ─────────────────────────────────────────────────────────────
@@ -185,7 +169,7 @@ function RFQModal({ products, onClose }) {
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '10px' }}>
+              <div className="rfq-modal-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '10px' }}>
                 <input style={inputStyle} placeholder="Your Name *" value={form.name} onChange={set('name')} required />
                 <input style={inputStyle} placeholder="Company Name *" value={form.company} onChange={set('company')} required />
                 <input style={inputStyle} type="email" placeholder="Email Address *" value={form.email} onChange={set('email')} required />
@@ -273,13 +257,59 @@ export default function Products() {
   return (
     <>
       <style>{`
+        /* ── scrollbars ── */
         .tabs-scroll::-webkit-scrollbar { display: none; }
+
+        /* ── product grid ── */
         @media (max-width: 1100px) { .prod-grid { grid-template-columns: repeat(3,1fr) !important; } }
-        @media (max-width: 780px)  { .prod-grid { grid-template-columns: repeat(2,1fr) !important; } }
-        @media (max-width: 480px)  { .prod-grid { grid-template-columns: 1fr !important; } }
-        @media (max-width: 680px)  {
+        @media (max-width: 700px)  { .prod-grid { grid-template-columns: repeat(2,1fr) !important; } }
+        @media (max-width: 420px)  { .prod-grid { grid-template-columns: 1fr !important; } }
+
+        /* ── hero ── */
+        @media (max-width: 768px) {
+          .ph-img-wrap { display: none !important; }
+          .ph-content  { padding: 0 20px !important; }
+          .ph-content > div { padding: 36px 0 28px !important; max-width: 100% !important; }
+          .ph-stats { gap: 16px !important; }
+        }
+
+        /* ── tabs ── */
+        @media (max-width: 640px) {
+          .tabs-scroll { padding: 0 16px !important; }
+        }
+
+        /* ── main page padding ── */
+        @media (max-width: 640px) {
+          .page-inner { padding-left: 16px !important; padding-right: 16px !important; }
+        }
+
+        /* ── search row ── */
+        @media (max-width: 500px) {
+          .search-row { flex-direction: column !important; align-items: stretch !important; }
+          .sort-box   { width: 100% !important; }
+        }
+
+        /* ── cta banner ── */
+        @media (max-width: 680px) {
           .cta-banner { flex-direction: column !important; }
           .cta-right  { align-items: flex-start !important; }
+        }
+
+        /* ── section header ── */
+        @media (max-width: 480px) {
+          .section-head { flex-direction: column !important; align-items: flex-start !important; gap: 8px !important; }
+        }
+
+        /* ── rfq modal grid ── */
+        @media (max-width: 480px) {
+          .rfq-modal-grid { grid-template-columns: 1fr !important; }
+        }
+
+        /* ── batch RFQ bar ── */
+        @media (max-width: 640px) {
+          .rfq-bar-inner { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; }
+          .rfq-bar-btns  { width: 100% !important; display: flex !important; gap: 8px !important; }
+          .rfq-bar-btns button { flex: 1 !important; }
         }
       `}</style>
 
@@ -318,10 +348,10 @@ export default function Products() {
         </div>
 
         {/* ── Main content ───────────────────────────────────────── */}
-        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '24px 32px 0' }}>
+        <div className="page-inner" style={{ maxWidth: '1280px', margin: '0 auto', padding: '24px 32px 0' }}>
 
           {/* Search + Sort */}
-          <div style={{ display: 'flex', gap: '10px', alignItems: 'center', marginBottom: '20px' }}>
+          <div className="search-row" style={{ display: 'flex', gap: '10px', alignItems: 'center', marginBottom: '20px' }}>
             <div style={{ flex: 1, display: 'flex', alignItems: 'center', border: '1px solid #e0e0e0', borderRadius: '8px', background: '#fff', padding: '0 14px', height: '46px', gap: '10px' }}>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#bbb" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
@@ -337,7 +367,7 @@ export default function Products() {
                 <button onClick={() => { setSearch(''); setPage(1); }} style={{ background: 'none', border: 'none', color: '#bbb', cursor: 'pointer', fontSize: '16px', padding: 0, lineHeight: 1 }}>✕</button>
               )}
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', border: '1px solid #e0e0e0', borderRadius: '8px', background: '#fff', padding: '0 12px', height: '46px', gap: '6px', flexShrink: 0 }}>
+            <div className="sort-box" style={{ display: 'flex', alignItems: 'center', border: '1px solid #e0e0e0', borderRadius: '8px', background: '#fff', padding: '0 12px', height: '46px', gap: '6px', flexShrink: 0 }}>
               <span style={{ fontSize: '12px', color: '#999' }}>Sort by:</span>
               <select
                 value={sort}
@@ -422,32 +452,28 @@ export default function Products() {
           animation: 'slideUp 0.25s ease',
         }}>
           <style>{`@keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }`}</style>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#1FA971', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px', fontWeight: '800', color: '#fff', flexShrink: 0 }}>
-              {selected.size}
+          <div className="rfq-bar-inner" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', gap: '14px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '14px', minWidth: 0 }}>
+              <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: '#1FA971', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '16px', fontWeight: '800', color: '#fff', flexShrink: 0 }}>
+                {selected.size}
+              </div>
+              <div style={{ minWidth: 0 }}>
+                <p style={{ margin: 0, color: '#fff', fontSize: '14px', fontWeight: '600' }}>
+                  {selected.size} product{selected.size !== 1 ? 's' : ''} selected
+                </p>
+                <p style={{ margin: 0, color: 'rgba(255,255,255,0.5)', fontSize: '11px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                  {selectedProducts.map(p => p.name).join(' · ')}
+                </p>
+              </div>
             </div>
-            <div>
-              <p style={{ margin: 0, color: '#fff', fontSize: '14px', fontWeight: '600' }}>
-                {selected.size} product{selected.size !== 1 ? 's' : ''} selected for batch RFQ
-              </p>
-              <p style={{ margin: 0, color: 'rgba(255,255,255,0.5)', fontSize: '12px' }}>
-                {selectedProducts.map(p => p.name).join(' · ')}
-              </p>
+            <div className="rfq-bar-btns" style={{ display: 'flex', gap: '10px', flexShrink: 0 }}>
+              <button onClick={clearSelection} style={{ background: 'transparent', border: '1px solid rgba(255,255,255,0.25)', color: 'rgba(255,255,255,0.7)', padding: '9px 16px', borderRadius: '7px', fontSize: '13px', cursor: 'pointer', fontFamily: 'inherit', fontWeight: '500' }}>
+                Clear
+              </button>
+              <button onClick={() => setShowModal(true)} style={{ background: '#1FA971', border: 'none', color: '#fff', padding: '9px 20px', borderRadius: '7px', fontSize: '13px', fontWeight: '700', cursor: 'pointer', fontFamily: 'inherit' }}>
+                Send Batch RFQ ({selected.size}) →
+              </button>
             </div>
-          </div>
-          <div style={{ display: 'flex', gap: '10px', flexShrink: 0 }}>
-            <button
-              onClick={clearSelection}
-              style={{ background: 'transparent', border: '1px solid rgba(255,255,255,0.25)', color: 'rgba(255,255,255,0.7)', padding: '9px 16px', borderRadius: '7px', fontSize: '13px', cursor: 'pointer', fontFamily: 'inherit', fontWeight: '500' }}
-            >
-              Clear
-            </button>
-            <button
-              onClick={() => setShowModal(true)}
-              style={{ background: '#1FA971', border: 'none', color: '#fff', padding: '9px 20px', borderRadius: '7px', fontSize: '13px', fontWeight: '700', cursor: 'pointer', fontFamily: 'inherit' }}
-            >
-              Send Batch RFQ ({selected.size}) &nbsp;→
-            </button>
           </div>
         </div>
       )}

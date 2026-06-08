@@ -56,7 +56,7 @@ const services = [
 
 export default function Shipping() {
   return (
-    <section style={S.section}>
+    <section style={S.section} className="sh-section">
       <div style={S.orbLeft}  aria-hidden="true" />
       <div style={S.orbRight} aria-hidden="true" />
 
@@ -114,6 +114,11 @@ export default function Shipping() {
         }
         @media (max-width: 640px) {
           .sh-services { grid-template-columns: repeat(2, 1fr) !important; }
+          .sh-section { padding: 52px 20px !important; }
+        }
+        @media (max-width: 480px) {
+          .sh-services { grid-template-columns: 1fr !important; }
+          .sh-section { padding: 40px 16px !important; }
         }
       `}</style>
     </section>

@@ -95,12 +95,12 @@ export default function CertificationsPage() {
     <main style={S.main}>
 
       {/* ── HERO ── */}
-      <section style={S.hero}>
+      <section style={S.hero} className="cp-hero">
         <div style={S.dotGrid} aria-hidden="true" />
 
-        <div style={S.heroInner}>
+        <div style={S.heroInner} className="cp-hero-inner">
           {/* LEFT */}
-          <div style={S.heroLeft}>
+          <div style={S.heroLeft} className="cp-hero-left">
             <span style={S.heroBadge}>
               <svg viewBox="0 0 24 24" fill="none" stroke="#1FA971" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="14" height="14">
                 <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z" />
@@ -130,7 +130,7 @@ export default function CertificationsPage() {
           </div>
 
           {/* RIGHT — hero image */}
-          <div style={S.heroRight}>
+          <div style={S.heroRight} className="cp-hero-right">
             <img
               src="/images/categories/hero1.png"
               alt="Certifications"
@@ -142,8 +142,8 @@ export default function CertificationsPage() {
       </section>
 
       {/* ── CERTIFICATIONS GRID ── */}
-      <section style={S.section}>
-        <div style={S.container}>
+      <section style={S.section} className="cp-section-pad">
+        <div style={S.container} className="cp-container">
           <div style={S.sectionHead}>
             <h2 style={S.sectionTitle}>Our Certifications</h2>
             <p style={S.sectionSub}>
@@ -183,8 +183,8 @@ export default function CertificationsPage() {
       </section>
 
       {/* ── DOCUMENTATION SUPPORT ── */}
-      <section style={S.docSection}>
-        <div style={S.container}>
+      <section style={S.docSection} className="cp-doc-section-pad">
+        <div style={S.container} className="cp-container">
           <div style={S.sectionHead}>
             <h2 style={S.sectionTitle}>Complete Documentation Support</h2>
             <p style={S.sectionSub}>
@@ -213,7 +213,7 @@ export default function CertificationsPage() {
       </section>
 
       {/* ── TRUST BAR ── */}
-      <section style={S.trustBar}>
+      <section style={S.trustBar} className="cp-trust-bar-pad">
         <div style={S.trustBarInner}>
           <div style={S.trustBarLeft}>
             <div style={S.trustBarIcon}>
@@ -244,7 +244,7 @@ export default function CertificationsPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section style={S.cta}>
+      <section style={S.cta} className="cp-cta-pad">
         <div style={S.ctaBlobLeft} aria-hidden="true" />
         <div style={S.ctaBlobRight} aria-hidden="true" />
         <div style={S.ctaInner}>
@@ -311,6 +311,25 @@ export default function CertificationsPage() {
         .cp-outline-btn { transition: background 0.22s ease; }
         .cp-outline-btn:hover { background: rgba(13,27,42,0.06) !important; }
         @media (max-width: 640px) { .cp-doc-grid { grid-template-columns: 1fr; } }
+
+        @media (max-width: 768px) {
+          .cp-hero { padding: 40px 20px !important; min-height: auto !important; }
+          .cp-hero-inner { flex-direction: column !important; }
+          .cp-hero-left { flex: none !important; max-width: 100% !important; padding-right: 0 !important; }
+          .cp-hero-right { display: none !important; }
+          .cp-container { padding: 0 20px !important; }
+          .cp-section-pad { padding: 48px 20px !important; }
+          .cp-doc-section-pad { padding: 48px 20px !important; }
+          .cp-trust-bar-pad { padding: 24px 20px !important; }
+          .cp-cta-pad { padding: 60px 20px !important; }
+        }
+        @media (max-width: 480px) {
+          .cp-hero { padding: 32px 16px !important; }
+          .cp-container { padding: 0 16px !important; }
+          .cp-section-pad { padding: 40px 16px !important; }
+          .cp-doc-section-pad { padding: 40px 16px !important; }
+          .cp-cta-pad { padding: 48px 16px !important; }
+        }
       `}</style>
     </main>
   );

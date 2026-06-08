@@ -77,7 +77,7 @@ const features = [
 
 export default function Quality() {
   return (
-    <section style={S.section}>
+    <section style={S.section} className="wc-section">
       <div style={S.container}>
 
         {/* left: heading */}
@@ -137,6 +137,11 @@ export default function Quality() {
         }
         @media (max-width: 600px) {
           .wc-grid { grid-template-columns: repeat(2, 1fr); }
+          .wc-section { padding: 52px 20px !important; }
+        }
+        @media (max-width: 480px) {
+          .wc-grid { grid-template-columns: 1fr; }
+          .wc-section { padding: 40px 16px !important; }
         }
       `}</style>
     </section>

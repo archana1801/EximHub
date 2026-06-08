@@ -105,7 +105,7 @@ const Pin = () => (
 
 export default function HowItWorks() {
   return (
-    <section style={S.section}>
+    <section style={S.section} className="hiw-section">
 
       {/* dot grid background */}
       <div style={S.dotGrid} aria-hidden="true" />
@@ -207,6 +207,12 @@ export default function HowItWorks() {
         }
         .hiw-card:hover img {
           transform: scale(1.05);
+        }
+        @media (max-width: 768px) {
+          .hiw-section { padding: 52px 20px !important; }
+        }
+        @media (max-width: 480px) {
+          .hiw-section { padding: 40px 16px !important; }
         }
       `}</style>
     </section>

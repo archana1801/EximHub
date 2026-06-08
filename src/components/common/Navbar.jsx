@@ -32,7 +32,7 @@ export default function Navbar() {
   return (
     <>
       <nav style={{ ...S.nav, ...(scrolled ? S.navScrolled : {}) }}>
-        <div style={S.inner}>
+        <div style={S.inner} className="nb-inner">
           
           {/* LOGO */}
           <Link to="/" style={S.logo}>
@@ -146,6 +146,9 @@ export default function Navbar() {
         @media (max-width: 860px) {
           .nb-desktop-links { display: none !important; }
           .nb-cta { display: none !important; }
+        }
+        @media (max-width: 480px) {
+          .nb-inner { padding: 0 16px !important; }
         }
       `}</style>
     </>

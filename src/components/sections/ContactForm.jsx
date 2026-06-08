@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function ContactForm() {
   return (
-    <section style={S.section}>
+    <section style={S.section} className="cf-section">
       <div style={S.orbLeft}  aria-hidden="true" />
       <div style={S.orbRight} aria-hidden="true" />
 
@@ -56,6 +56,10 @@ export default function ContactForm() {
         }
         @media (max-width: 860px) {
           .cta-container { flex-direction: column !important; text-align: center; align-items: center !important; }
+          .cf-section { padding: 52px 20px !important; }
+        }
+        @media (max-width: 480px) {
+          .cf-section { padding: 40px 16px !important; }
         }
       `}</style>
     </section>

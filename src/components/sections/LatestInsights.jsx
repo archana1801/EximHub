@@ -39,7 +39,7 @@ const posts = [
 
 export default function LatestInsights() {
   return (
-    <section style={S.section}>
+    <section style={S.section} className="li-section">
       <div style={S.container}>
 
         {/* heading row */}
@@ -108,6 +108,10 @@ export default function LatestInsights() {
         }
         @media (max-width: 480px) {
           .li-grid { grid-template-columns: 1fr; }
+          .li-section { padding: 40px 16px !important; }
+        }
+        @media (max-width: 768px) {
+          .li-section { padding: 52px 20px !important; }
         }
       `}</style>
     </section>

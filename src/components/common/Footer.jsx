@@ -1,4 +1,12 @@
-const quickLinks = ["Home", "Products", "About", "Certifications", "Contact"];
+import { Link } from "react-router-dom";
+
+const quickLinks = [
+  { label: "Home", path: "/" },
+  { label: "Products", path: "/products" },
+  { label: "About", path: "/about" },
+  { label: "Certifications", path: "/certifications" },
+  { label: "Contact", path: "/contact" },
+];
 
 const services = [
   "Supplier Sourcing",
@@ -14,7 +22,7 @@ export default function Footer() {
       {/* top accent line */}
       <div style={S.topAccent} aria-hidden="true" />
 
-      <div style={S.container}>
+      <div style={S.container} className="ft-container">
 
         {/* grid of 4 columns */}
         <div className="ft-grid">
@@ -32,7 +40,7 @@ export default function Footer() {
               <span style={S.logoText}>ImportWiz</span>
             </div>
             <p style={S.brandDesc}>
-              Global sourcing and export solutions for importers worldwide. Connecting buyers with verified suppliers since 2018.
+              Global sourcing and export solutions for importers worldwide. Connecting buyers with verified suppliers.
             </p>
             <div style={S.socialRow}>
               {/* LinkedIn */}
@@ -63,12 +71,12 @@ export default function Footer() {
           <div style={S.col}>
             <p style={S.colHeading}>Quick Links</p>
             <ul style={S.linkList}>
-              {quickLinks.map((link) => (
-                <li key={link}>
-                  <a href="#" style={S.link} className="ft-link">
+              {quickLinks.map((item) => (
+                <li key={item.label}>
+                  <Link to={item.path} style={S.link} className="ft-link">
                     <span style={S.linkArrow}>›</span>
-                    {link}
-                  </a>
+                    {item.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -101,19 +109,8 @@ export default function Footer() {
                     <polyline points="22,6 12,13 2,6" />
                   </svg>
                 </span>
-                <a href="mailto:info@importwiz.com" style={S.contactLink} className="ft-link">
-                  info@importwiz.com
-                </a>
-              </div>
-
-              <div style={S.contactItem}>
-                <span style={S.contactIcon}>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="15" height="15">
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
-                  </svg>
-                </span>
-                <a href="tel:+911234567890" style={S.contactLink} className="ft-link">
-                  +91 12345 67890
+                <a href="mailto:info@importwiz.shop" style={S.contactLink} className="ft-link">
+                  info@importwiz.shop
                 </a>
               </div>
 
@@ -124,18 +121,23 @@ export default function Footer() {
                     <circle cx="12" cy="10" r="3" />
                   </svg>
                 </span>
-                <span style={S.contactText}>Mumbai, Maharashtra, India</span>
+                <span style={S.contactText}>
+                  <strong style={{ color: "rgba(13,27,42,0.65)" }}>India:</strong> 26 A/1C, Shivkuti, Teliarganj, Prayagraj
+                </span>
               </div>
 
               <div style={S.contactItem}>
                 <span style={S.contactIcon}>
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="15" height="15">
-                    <circle cx="12" cy="12" r="10" />
-                    <polyline points="12 6 12 12 16 14" />
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                    <circle cx="12" cy="10" r="3" />
                   </svg>
                 </span>
-                <span style={S.contactText}>Mon – Sat, 9:00 AM – 6:00 PM IST</span>
+                <span style={S.contactText}>
+                  <strong style={{ color: "rgba(13,27,42,0.65)" }}>Tanzania:</strong> AMI Building, Samora/Mkwépu St., Dar es Salaam
+                </span>
               </div>
+
             </div>
           </div>
         </div>
@@ -179,9 +181,14 @@ export default function Footer() {
         }
         @media (max-width: 960px) {
           .ft-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+          .ft-container { padding: 0 32px !important; }
         }
         @media (max-width: 520px) {
           .ft-grid { grid-template-columns: 1fr; gap: 28px; }
+          .ft-container { padding: 0 20px !important; }
+        }
+        @media (max-width: 380px) {
+          .ft-container { padding: 0 16px !important; }
         }
       `}</style>
     </footer>

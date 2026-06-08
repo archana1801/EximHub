@@ -148,8 +148,32 @@ export default function RequestQuote() {
       <style>{`
         .rq-input:focus { border-color: #1FA971 !important; box-shadow: 0 0 0 3px rgba(31,169,113,0.1); }
         .rq-type-card:hover { border-color: #1FA971 !important; }
-        @media (max-width: 960px) { .rq-body { flex-direction: column !important; } .rq-sidebar { width: 100% !important; } }
-        @media (max-width: 600px) { .rq-header-inner { flex-direction: column !important; } .rq-header-img { display: none !important; } }
+
+        /* tablet: stack sidebar below form */
+        @media (max-width: 960px) {
+          .rq-body    { flex-direction: column !important; }
+          .rq-sidebar { width: 100% !important; }
+        }
+
+        /* small tablet / large phone */
+        @media (max-width: 640px) {
+          .rq-header-inner { flex-direction: column !important; }
+          .rq-header-img   { display: none !important; }
+          .rq-body         { padding: 24px 16px 48px !important; }
+          .rq-form-card    { padding: 24px 20px !important; }
+          .rq-name-grid    { grid-template-columns: 1fr !important; }
+          .rq-type-grid    { grid-template-columns: 1fr !important; }
+          .rq-rate-row     { flex-wrap: wrap !important; }
+          .rq-rate-currency{ width: 100% !important; }
+          .rq-rate-unit    { width: 100% !important; }
+          .rq-rate-per     { display: none !important; }
+          .rq-header-inner { padding: 24px 16px !important; }
+        }
+
+        /* phone */
+        @media (max-width: 420px) {
+          .rq-why-items { gap: 14px !important; }
+        }
       `}</style>
 
       {/* ── Page header ─────────────────────────────────────────── */}
@@ -190,7 +214,7 @@ export default function RequestQuote() {
       <div className="rq-body" style={{ maxWidth: '1280px', margin: '0 auto', padding: '36px 32px 60px', display: 'flex', gap: '28px', alignItems: 'flex-start' }}>
 
         {/* ── Form card ─────────────────────────────────────────── */}
-        <div style={{ flex: 1, background: '#fff', borderRadius: '16px', border: '1.5px solid #e5e7eb', boxShadow: '0 2px 16px rgba(0,0,0,0.05)', padding: '36px 32px' }}>
+        <div className="rq-form-card" style={{ flex: 1, background: '#fff', borderRadius: '16px', border: '1.5px solid #e5e7eb', boxShadow: '0 2px 16px rgba(0,0,0,0.05)', padding: '36px 32px' }}>
           <form onSubmit={handleSubmit}>
 
             {/* 1. Product */}
@@ -250,7 +274,7 @@ export default function RequestQuote() {
             {/* 4. Product Type */}
             <div style={{ marginBottom: '28px' }}>
               <p style={label}>4. Product Type <span style={required}>*</span></p>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+              <div className="rq-type-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 {[
                   { value: 'Eco-Friendly', icon: '🌿', desc: 'Environmentally friendly packaging' },
                   { value: 'Regular',      icon: '📦', desc: 'Standard packaging' },
@@ -293,9 +317,9 @@ export default function RequestQuote() {
             {/* 5. Target Rate */}
             <div style={{ marginBottom: '28px' }}>
               <p style={label}>5. Target Rate (Per Unit) <span style={required}>*</span></p>
-              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+              <div className="rq-rate-row" style={{ display: 'flex', gap: '8px', alignItems: 'center', flexWrap: 'wrap' }}>
                 <select
-                  className="rq-input"
+                  className="rq-input rq-rate-currency"
                   value={form.currency}
                   onChange={set('currency')}
                   style={{ ...field, width: '130px', flexShrink: 0 }}
@@ -311,11 +335,11 @@ export default function RequestQuote() {
                   placeholder="Enter your target rate"
                   value={form.targetRate}
                   onChange={set('targetRate')}
-                  style={{ ...field, flex: 1 }}
+                  style={{ ...field, flex: 1, minWidth: '120px' }}
                 />
-                <span style={{ fontSize: '13px', color: '#6b7280', flexShrink: 0, fontWeight: '500' }}>Per</span>
+                <span className="rq-rate-per" style={{ fontSize: '13px', color: '#6b7280', flexShrink: 0, fontWeight: '500' }}>Per</span>
                 <select
-                  className="rq-input"
+                  className="rq-input rq-rate-unit"
                   required
                   value={form.unit}
                   onChange={set('unit')}

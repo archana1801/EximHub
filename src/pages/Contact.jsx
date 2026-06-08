@@ -50,11 +50,20 @@ export default function Contact() {
       <style>{`
         .ct-input:focus { border-color: #1FA971 !important; box-shadow: 0 0 0 3px rgba(31,169,113,0.1); }
         @media (max-width: 860px) { .ct-body { flex-direction: column !important; } .ct-sidebar { width: 100% !important; } }
+        @media (max-width: 640px) {
+          .ct-header-inner { padding: 24px 20px !important; flex-direction: column !important; align-items: flex-start !important; }
+          .ct-header-img { display: none !important; }
+          .ct-body { padding: 24px 20px 48px !important; }
+        }
+        @media (max-width: 480px) {
+          .ct-header-inner { padding: 20px 16px !important; }
+          .ct-body { padding: 20px 16px 40px !important; }
+        }
       `}</style>
 
       {/* Header */}
       <div style={S.header}>
-        <div style={S.headerInner}>
+        <div style={S.headerInner} className="ct-header-inner">
           <div>
             <nav style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '16px', fontSize: '13px', color: '#9ca3af' }}>
               <Link to="/" style={{ color: '#9ca3af', textDecoration: 'none' }}>Home</Link>
@@ -70,6 +79,7 @@ export default function Contact() {
             src="/images/categories/inquiry.jpg"
             alt=""
             style={S.headerImg}
+            className="ct-header-img"
             onError={e => { e.target.style.display = 'none'; }}
           />
         </div>
@@ -168,10 +178,13 @@ export default function Contact() {
             <div>
               <p style={S.infoLabel}>Address</p>
               <address style={{ fontStyle: 'normal', fontSize: '14px', color: '#374151', lineHeight: '1.75', fontWeight: '500' }}>
-                Plot No. 621-640, Picha Ya Ndege<br />
-                Kibaha CBD<br />
-                Pwani, 61104<br />
-                Tanzania
+                <strong style={{ color: '#0B1F3A' }}>India:</strong><br />
+                26 A/1C, Shivkuti, Teliarganj,<br />
+                Prayagraj, India<br />
+                <br />
+                <strong style={{ color: '#0B1F3A' }}>Tanzania:</strong><br />
+                AMI Building, Samora/Mkwépu St.,<br />
+                Dar es Salaam
               </address>
             </div>
           </div>

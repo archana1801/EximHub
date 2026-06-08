@@ -13,7 +13,7 @@ const categories = [
 
 export default function ProductCategories() {
   return (
-    <section style={S.section}>
+    <section style={S.section} className="pc-section">
       <div style={S.container}>
 
         {/* heading */}
@@ -89,6 +89,10 @@ export default function ProductCategories() {
         }
         @media (max-width: 480px) {
           .pc-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+          .pc-section { padding: 40px 16px !important; }
+        }
+        @media (max-width: 768px) {
+          .pc-section { padding: 52px 20px !important; }
         }
       `}</style>
     </section>

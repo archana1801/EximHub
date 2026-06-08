@@ -132,13 +132,13 @@ export default function Resources() {
     <main style={S.main}>
 
       {/* ── 1. HERO ── */}
-      <section style={S.hero}>
+      <section style={S.hero} className="rs-hero">
         <div style={S.heroBlobLeft}  aria-hidden="true" />
         <div style={S.heroBlobRight} aria-hidden="true" />
-        <div style={S.heroInner}>
+        <div style={S.heroInner} className="rs-hero-inner">
 
           {/* LEFT */}
-          <div style={S.heroLeft}>
+          <div style={S.heroLeft} className="rs-hero-left">
             <span style={S.badge}>
               <span style={S.badgeDot} />
               Knowledge Base
@@ -157,7 +157,7 @@ export default function Resources() {
           </div>
 
           {/* RIGHT — hero image */}
-          <div style={S.heroRight}>
+          <div style={S.heroRight} className="rs-hero-right">
             <img
               src="/images/categories/resourcehero.png"
               alt="Resources and guides"
@@ -170,8 +170,8 @@ export default function Resources() {
       </section>
 
       {/* ── 2. RESOURCE CARDS ── */}
-      <section style={S.cardsSection}>
-        <div style={S.container}>
+      <section style={S.cardsSection} className="rs-cards-section">
+        <div style={S.container} className="rs-container">
           <div style={S.sectionHead}>
             <h2 style={S.sectionTitle}>Guides &amp; Handbooks</h2>
             <p style={S.sectionSub}>
@@ -205,10 +205,10 @@ export default function Resources() {
       </section>
 
       {/* ── 3. FAQ ── */}
-      <section style={S.faqSection}>
+      <section style={S.faqSection} className="rs-faq-section">
         <div style={S.faqBlobLeft}  aria-hidden="true" />
         <div style={S.faqBlobRight} aria-hidden="true" />
-        <div style={S.container}>
+        <div style={S.container} className="rs-container">
           <div style={S.sectionHead}>
             <h2 style={S.sectionTitle}>Frequently Asked Questions</h2>
             <p style={S.sectionSub}>
@@ -217,10 +217,10 @@ export default function Resources() {
           </div>
 
           {/* 2-col: image left + accordion right */}
-          <div style={S.faqLayout}>
+          <div style={S.faqLayout} className="rs-faq-layout">
 
             {/* LEFT — question image */}
-            <div style={S.faqImgCol}>
+            <div style={S.faqImgCol} className="rs-faq-img-col">
               <img
                 src="/images/categories/question.png"
                 alt="FAQ"
@@ -258,7 +258,7 @@ export default function Resources() {
       </section>
 
       {/* ── 4. SUPPORT CTA ── */}
-      <section style={S.ctaSection}>
+      <section style={S.ctaSection} className="rs-cta-section">
         <div style={S.ctaBlobLeft}  aria-hidden="true" />
         <div style={S.ctaBlobRight} aria-hidden="true" />
         <div style={S.ctaInner}>
@@ -352,6 +352,24 @@ export default function Resources() {
         }
         @media (max-width: 860px) {
           .rs-faq-layout { flex-direction: column !important; }
+          .rs-faq-img-col { display: none !important; }
+        }
+        @media (max-width: 768px) {
+          .rs-hero { padding: 48px 20px 40px !important; }
+          .rs-hero-inner { flex-direction: column !important; gap: 24px !important; }
+          .rs-hero-left { flex: none !important; max-width: 100% !important; }
+          .rs-hero-right { display: none !important; }
+          .rs-container { padding: 0 20px !important; }
+          .rs-cards-section { padding: 52px 20px !important; }
+          .rs-faq-section { padding: 52px 20px !important; }
+          .rs-cta-section { padding: 60px 20px !important; }
+        }
+        @media (max-width: 480px) {
+          .rs-hero { padding: 36px 16px 32px !important; }
+          .rs-container { padding: 0 16px !important; }
+          .rs-cards-section { padding: 40px 16px !important; }
+          .rs-faq-section { padding: 40px 16px !important; }
+          .rs-cta-section { padding: 48px 16px !important; }
         }
       `}</style>
     </main>

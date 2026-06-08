@@ -288,11 +288,11 @@ export default function Hero() {
   };
 
   return (
-    <section style={S.hero}>
-      <div style={S.container}>
+    <section style={S.hero} className="hero-section">
+      <div style={S.container} className="hero-container">
 
         {/* ── LEFT ── */}
-        <div style={S.left}>
+        <div style={S.left} className="hero-left">
           <h1 style={S.heading}>
             Simplifying Global Imports
             <br />
@@ -329,7 +329,7 @@ export default function Hero() {
         </div>
 
         {/* ── RIGHT — image + form card ── */}
-        <div style={S.right}>
+        <div style={S.right} className="hero-right">
           <div style={S.formCard}>
             <h2 style={S.formTitle}>
               Get a <span style={S.green}>Free</span> Quote
@@ -446,6 +446,19 @@ export default function Hero() {
         </div>
 
       </div>
+
+      <style>{`
+        @media (max-width: 860px) {
+          .hero-container { flex-direction: column !important; gap: 36px !important; }
+          .hero-right { width: 100% !important; }
+        }
+        @media (max-width: 768px) {
+          .hero-section { padding: 48px 24px !important; min-height: auto !important; }
+        }
+        @media (max-width: 480px) {
+          .hero-section { padding: 36px 16px !important; }
+        }
+      `}</style>
     </section>
   );
 }
