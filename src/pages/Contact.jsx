@@ -58,6 +58,7 @@ export default function Contact() {
         @media (max-width: 480px) {
           .ct-header-inner { padding: 20px 16px !important; }
           .ct-body { padding: 20px 16px 40px !important; }
+          .ct-form-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
 
@@ -109,7 +110,7 @@ export default function Contact() {
             </div>
           ) : (
             <form onSubmit={handleSubmit}>
-              <div style={S.grid2}>
+              <div className="ct-form-grid" style={S.grid2}>
                 <div>
                   <label style={S.label}>Full Name <span style={req}>*</span></label>
                   <input className="ct-input" required style={S.input} placeholder="Your full name" value={form.name} onChange={set('name')} />

@@ -68,7 +68,7 @@ export default function ProductCard({ product, selected, onToggleSelect }) {
       }}
     >
       {/* ── Image ── */}
-      <div style={{ position: 'relative', width: '100%', paddingTop: '65%', overflow: 'hidden', flexShrink: 0 }}>
+      <div style={{ position: 'relative', width: '100%', paddingTop: '100%', overflow: 'hidden', flexShrink: 0 }}>
         {product.image ? (
           <img
             src={product.image}
