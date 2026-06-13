@@ -168,6 +168,21 @@ export default function Contact() {
             </div>
           </div>
 
+          {/* Phone */}
+          <div style={S.infoCard}>
+            <div style={S.iconBox}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1FA971" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.77a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+              </svg>
+            </div>
+            <div>
+              <p style={S.infoLabel}>Phone</p>
+              <a href="tel:+14175412670" style={{ fontSize: '14px', fontWeight: '600', color: '#0B1F3A', textDecoration: 'none' }}>
+                +1 (417) 541-2670
+              </a>
+            </div>
+          </div>
+
           {/* Address */}
           <div style={S.infoCard}>
             <div style={{ ...S.iconBox, alignSelf: 'flex-start', marginTop: '2px' }}>
@@ -187,6 +202,33 @@ export default function Contact() {
                 AMI Building, Samora/Mkwépu St.,<br />
                 Dar es Salaam
               </address>
+            </div>
+          </div>
+
+          {/* Social */}
+          <div style={S.infoCard}>
+            <div style={{ flex: 1 }}>
+              <p style={S.infoLabel}>Follow Us</p>
+              <div style={{ display: 'flex', gap: '10px', marginTop: '8px' }}>
+                <a
+                  href="https://www.facebook.com/share/1Cn8oXUuxh/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ display: 'flex', alignItems: 'center', gap: '7px', background: '#1877f2', color: '#fff', borderRadius: '8px', padding: '8px 14px', fontSize: '13px', fontWeight: '700', textDecoration: 'none' }}
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                  Facebook
+                </a>
+                <a
+                  href="https://www.instagram.com/importwizz?igsh=amhzdTNuaHo3bmF0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ display: 'flex', alignItems: 'center', gap: '7px', background: 'linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)', color: '#fff', borderRadius: '8px', padding: '8px 14px', fontSize: '13px', fontWeight: '700', textDecoration: 'none' }}
+                >
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                  Instagram
+                </a>
+              </div>
             </div>
           </div>
 
