@@ -1,14 +1,17 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 
-// ── Styles defined up-front ────────────────────────────────────────────────
+const ACCESS_KEY = '5c8087d3-a4f1-4444-a116-2d0cc47f79d2';
+
+// ── Styles ─────────────────────────────────────────────────────────────────
 const S = {
   page:    { background: '#f7f8fa', minHeight: '100vh' },
-  header:  { background: '#0B1F3A', position: 'relative', overflow: 'hidden' },
-  headerInner: { maxWidth: '1280px', margin: '0 auto', padding: '44px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '24px', position: 'relative', zIndex: 1 },
-  h1:      { fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: '800', color: '#fff', margin: '0 0 10px', lineHeight: '1.15' },
-  sub:     { fontSize: '15px', color: 'rgba(255,255,255,0.62)', margin: 0, lineHeight: '1.7', maxWidth: '420px' },
-  headerImg: { width: '280px', height: '180px', objectFit: 'cover', borderRadius: '14px', boxShadow: '0 8px 40px rgba(0,0,0,0.4)', opacity: 0.85 },
+
+  /* ── Hero ── */
+  hero: { background: '#0B1F3A', position: 'relative', overflow: 'hidden' },
+  heroContent: { maxWidth: '1280px', margin: '0 auto', padding: '0 60px', position: 'relative', zIndex: 1 },
+  heroInner:   { maxWidth: '520px', padding: '52px 0 44px' },
+
+  /* ── Body ── */
   body:    { maxWidth: '1280px', margin: '0 auto', padding: '36px 32px 60px', display: 'flex', gap: '28px', alignItems: 'flex-start' },
   card:    { flex: 1, background: '#fff', borderRadius: '16px', border: '1.5px solid #e5e7eb', boxShadow: '0 2px 16px rgba(0,0,0,0.05)', padding: '36px 32px' },
   cardTitle: { fontSize: '18px', fontWeight: '800', color: '#0B1F3A', margin: '0 0 6px' },
@@ -16,7 +19,7 @@ const S = {
   grid2:   { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px', marginBottom: '14px' },
   label:   { display: 'block', fontSize: '13px', fontWeight: '600', color: '#374151', marginBottom: '6px' },
   input:   { width: '100%', padding: '11px 14px', borderRadius: '8px', border: '1.5px solid #e5e7eb', background: '#fff', fontSize: '13.5px', color: '#333', outline: 'none', fontFamily: 'inherit', boxSizing: 'border-box' },
-  submitBtn: { width: '100%', padding: '13px', background: '#1FA971', border: 'none', borderRadius: '9px', color: '#fff', fontSize: '15px', fontWeight: '700', cursor: 'pointer', fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' },
+  submitBtn: { width: '100%', padding: '13px', background: '#1FA971', border: 'none', borderRadius: '9px', color: '#fff', fontSize: '15px', fontWeight: '700', cursor: 'pointer', fontFamily: 'inherit', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', transition: 'background 0.15s' },
   sidebar: { width: '300px', flexShrink: 0, display: 'flex', flexDirection: 'column', gap: '16px' },
   infoCard: { background: '#fff', borderRadius: '12px', border: '1.5px solid #e5e7eb', boxShadow: '0 2px 10px rgba(0,0,0,0.04)', padding: '18px 20px', display: 'flex', alignItems: 'flex-start', gap: '14px' },
   iconBox: { width: '38px', height: '38px', borderRadius: '10px', flexShrink: 0, background: '#f0fdf8', border: '1px solid #bbf7d0', display: 'flex', alignItems: 'center', justifyContent: 'center' },
@@ -28,69 +31,112 @@ const S = {
 
 const req = { color: '#ef4444' };
 
+const INITIAL_FORM = { name: '', email: '', subject: '', message: '' };
+
 // ── Component ──────────────────────────────────────────────────────────────
 export default function Contact() {
-  const [form, setForm]           = useState({ name: '', email: '', subject: '', message: '' });
+  const [form, setForm]           = useState(INITIAL_FORM);
   const [submitted, setSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const set = key => e => setForm(f => ({ ...f, [key]: e.target.value }));
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    const body = `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`;
-    window.location.href =
-      `mailto:info@importwiz.shop` +
-      `?subject=${encodeURIComponent(form.subject)}` +
-      `&body=${encodeURIComponent(body)}`;
-    setSubmitted(true);
+    setSubmitError('');
+    setIsSending(true);
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: ACCESS_KEY,
+          subject:    'New Contact Inquiry',
+          from_name:  form.name,
+          replyto:    form.email,
+          'Full Name':    form.name,
+          'Email':        form.email,
+          'Subject':      form.subject,
+          'Message':      form.message,
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setForm(INITIAL_FORM);
+        setSubmitted(true);
+      } else {
+        setSubmitError(result.message || 'Submission failed. Please try again.');
+      }
+    } catch {
+      setSubmitError('Something went wrong. Please check your connection and try again.');
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
     <div style={S.page}>
       <style>{`
         .ct-input:focus { border-color: #1FA971 !important; box-shadow: 0 0 0 3px rgba(31,169,113,0.1); }
+
+        /* hero responsive */
+        .ct-img-wrap { position: absolute; right: 0; top: 0; bottom: 0; width: 52%; z-index: 0; }
+        @media (max-width: 768px) { .ct-img-wrap { display: none !important; } }
+        @media (max-width: 640px) {
+          .ct-hero-content { padding: 0 20px !important; }
+          .ct-hero-inner   { padding: 36px 0 28px !important; }
+        }
+        @media (max-width: 480px) {
+          .ct-hero-content { padding: 0 16px !important; }
+        }
+
+        /* body responsive */
         @media (max-width: 860px) { .ct-body { flex-direction: column !important; } .ct-sidebar { width: 100% !important; } }
         @media (max-width: 640px) {
-          .ct-header-inner { padding: 24px 20px !important; flex-direction: column !important; align-items: flex-start !important; }
-          .ct-header-img { display: none !important; }
           .ct-body { padding: 24px 20px 48px !important; }
         }
         @media (max-width: 480px) {
-          .ct-header-inner { padding: 20px 16px !important; }
           .ct-body { padding: 20px 16px 40px !important; }
           .ct-form-grid { grid-template-columns: 1fr !important; }
         }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
       `}</style>
 
-      {/* Header */}
-      <div style={S.header}>
+      {/* ── Hero ─────────────────────────────────────────────────── */}
+      <section style={S.hero}>
         {/* dot grid */}
         <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1px)', backgroundSize: '22px 22px', pointerEvents: 'none', zIndex: 0 }} />
-        <div style={S.headerInner} className="ct-header-inner">
-          <div>
-            <nav style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '16px', fontSize: '13px', color: 'rgba(255,255,255,0.45)' }}>
-              <Link to="/" style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>Home</Link>
-              <span>›</span>
-              <span style={{ color: 'rgba(255,255,255,0.85)', fontWeight: '500' }}>Contact Us</span>
-            </nav>
-            <h1 style={S.h1}>
+
+        {/* full-bleed image on the right */}
+        <div className="ct-img-wrap">
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, #0B1F3A 0%, rgba(11,31,58,0.55) 35%, transparent 70%)', zIndex: 1 }} />
+          <img
+            src="/images/categories/inquiry.jpg"
+            alt=""
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            onError={e => { e.target.parentElement.style.display = 'none'; }}
+          />
+        </div>
+
+        {/* text content */}
+        <div style={S.heroContent} className="ct-hero-content">
+          <div style={S.heroInner} className="ct-hero-inner">
+            <h1 style={{ fontSize: 'clamp(26px, 3.2vw, 40px)', fontWeight: '800', color: '#fff', margin: '0 0 14px', lineHeight: '1.15', letterSpacing: '-0.3px' }}>
               Get in <span style={{ color: '#1FA971' }}>Touch</span>
             </h1>
-            <p style={S.sub}>Have a question or want to start sourcing? Send us a message and we'll get back to you.</p>
-          </div>
-          <div className="ct-header-img" style={{ position: 'relative', flexShrink: 0 }}>
-            <div style={{ position: 'absolute', inset: 0, borderRadius: '14px', background: 'linear-gradient(to right, #0B1F3A 0%, transparent 40%)', zIndex: 1 }} />
-            <img
-              src="/images/categories/inquiry.jpg"
-              alt=""
-              style={S.headerImg}
-              onError={e => { e.target.style.display = 'none'; }}
-            />
+            <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.62)', margin: 0, lineHeight: '1.75', maxWidth: '400px' }}>
+              Have a question or want to start sourcing? Send us a message and we'll get back to you within 24 hours.
+            </p>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Body */}
+      {/* ── Body ─────────────────────────────────────────────────── */}
       <div className="ct-body" style={S.body}>
 
         {/* Form card */}
@@ -101,15 +147,15 @@ export default function Contact() {
           {submitted ? (
             <div style={S.successBox}>
               <div style={S.successIcon}>✅</div>
-              <h3 style={{ margin: '0 0 8px', fontSize: '17px', fontWeight: '800', color: '#0B1F3A' }}>Message Sent!</h3>
-              <p style={{ margin: '0 0 20px', color: '#6b7280', fontSize: '14px' }}>
-                Your message has been sent to <strong>info@importwiz.shop</strong>.
+              <h3 style={{ margin: '0 0 10px', fontSize: '18px', fontWeight: '800', color: '#0B1F3A' }}>Message Received!</h3>
+              <p style={{ margin: '0 0 24px', color: '#6b7280', fontSize: '14px', lineHeight: '1.7', maxWidth: '360px', marginLeft: 'auto', marginRight: 'auto' }}>
+                Thank you for contacting ImportWiz. We have received your inquiry and will get back to you shortly.
               </p>
               <button
                 onClick={() => setSubmitted(false)}
-                style={{ background: '#1FA971', color: '#fff', border: 'none', borderRadius: '8px', padding: '10px 24px', fontSize: '14px', fontWeight: '700', cursor: 'pointer', fontFamily: 'inherit' }}
+                style={{ background: '#1FA971', color: '#fff', border: 'none', borderRadius: '8px', padding: '10px 28px', fontSize: '14px', fontWeight: '700', cursor: 'pointer', fontFamily: 'inherit' }}
               >
-                Send Another
+                Send Another Message
               </button>
             </div>
           ) : (
@@ -143,11 +189,32 @@ export default function Contact() {
                 />
               </div>
 
-              <button type="submit" style={S.submitBtn}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" />
-                </svg>
-                Send Message
+              {/* Inline error */}
+              {submitError && (
+                <div style={{ marginBottom: '16px', padding: '12px 16px', background: '#fef2f2', border: '1.5px solid #fecaca', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '1px' }}>
+                    <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
+                  </svg>
+                  <p style={{ margin: 0, fontSize: '13px', color: '#b91c1c', lineHeight: '1.5' }}>{submitError}</p>
+                </div>
+              )}
+
+              <button type="submit" disabled={isSending} style={{ ...S.submitBtn, background: isSending ? '#6b7280' : '#1FA971', cursor: isSending ? 'not-allowed' : 'pointer' }}>
+                {isSending ? (
+                  <>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ animation: 'spin 1s linear infinite' }}>
+                      <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                    </svg>
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                      <line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" />
+                    </svg>
+                    Send Message
+                  </>
+                )}
               </button>
             </form>
           )}

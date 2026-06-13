@@ -201,16 +201,21 @@ export default function RequestQuote() {
         .rq-input:focus { border-color: #1FA971 !important; box-shadow: 0 0 0 3px rgba(31,169,113,0.1); }
         .rq-type-card:hover { border-color: #1FA971 !important; }
 
-        /* tablet: stack sidebar below form */
+        /* hero image */
+        .rq-img-wrap { position: absolute; right: 0; top: 0; bottom: 0; width: 52%; z-index: 0; }
+        @media (max-width: 768px) { .rq-img-wrap { display: none !important; } }
+        @media (max-width: 640px) {
+          .rq-hero-content { padding: 0 20px !important; }
+          .rq-hero-inner   { padding: 36px 0 28px !important; }
+        }
+        @media (max-width: 480px) { .rq-hero-content { padding: 0 16px !important; } }
+
+        /* body */
         @media (max-width: 960px) {
           .rq-body    { flex-direction: column !important; }
           .rq-sidebar { width: 100% !important; }
         }
-
-        /* small tablet / large phone */
         @media (max-width: 640px) {
-          .rq-header-inner { flex-direction: column !important; }
-          .rq-header-img   { display: none !important; }
           .rq-body         { padding: 24px 16px 48px !important; }
           .rq-form-card    { padding: 24px 20px !important; }
           .rq-name-grid    { grid-template-columns: 1fr !important; }
@@ -219,45 +224,40 @@ export default function RequestQuote() {
           .rq-rate-currency{ width: 100% !important; }
           .rq-rate-unit    { width: 100% !important; }
           .rq-rate-per     { display: none !important; }
-          .rq-header-inner { padding: 24px 16px !important; }
         }
-
-        /* phone */
         @media (max-width: 420px) {
           .rq-why-items { gap: 14px !important; }
         }
+        @keyframes spin { to { transform: rotate(360deg); } }
       `}</style>
 
-      {/* ── Page header ─────────────────────────────────────────── */}
-      <div style={{ background: 'linear-gradient(135deg, #f0f9f5 0%, #e8f4ff 100%)', borderBottom: '1px solid #e5e7eb', overflow: 'hidden' }}>
-        <div className="rq-header-inner" style={{ maxWidth: '1280px', margin: '0 auto', padding: '36px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '24px' }}>
-          <div style={{ flex: 1 }}>
-            <nav style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '18px', fontSize: '13px', color: '#9ca3af' }}>
-              <Link to="/" style={{ color: '#9ca3af' }}>Home</Link>
-              <span>›</span>
-              <Link to="/products" style={{ color: '#9ca3af' }}>Products</Link>
-              <span>›</span>
-              <span style={{ color: '#0B1F3A', fontWeight: '500' }}>Request Quote</span>
-            </nav>
-            <h1 style={{ fontSize: 'clamp(26px, 3vw, 38px)', fontWeight: '800', color: '#0B1F3A', margin: '0 0 12px', lineHeight: '1.15' }}>
-              Request a{' '}
-              <span style={{ color: '#1FA971' }}>Quote</span>
+      {/* ── Hero ─────────────────────────────────────────────────── */}
+      <section style={{ background: '#0B1F3A', position: 'relative', overflow: 'hidden' }}>
+        {/* dot grid */}
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1px)', backgroundSize: '22px 22px', pointerEvents: 'none', zIndex: 0 }} />
+
+        {/* full-bleed image on the right */}
+        <div className="rq-img-wrap">
+          <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, #0B1F3A 0%, rgba(11,31,58,0.55) 35%, transparent 70%)', zIndex: 1 }} />
+          <img
+            src="/images/categories/shipping2.jpg"
+            alt=""
+            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          />
+        </div>
+
+        {/* text content */}
+        <div className="rq-hero-content" style={{ maxWidth: '1280px', margin: '0 auto', padding: '0 60px', position: 'relative', zIndex: 1 }}>
+          <div className="rq-hero-inner" style={{ maxWidth: '520px', padding: '52px 0 44px' }}>
+            <h1 style={{ fontSize: 'clamp(26px, 3vw, 38px)', fontWeight: '800', color: '#fff', margin: '0 0 14px', lineHeight: '1.15', letterSpacing: '-0.3px' }}>
+              Request a <span style={{ color: '#1FA971' }}>Quote</span>
             </h1>
-            <p style={{ fontSize: '15px', color: '#6b7280', margin: 0, lineHeight: '1.7', maxWidth: '460px' }}>
+            <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.62)', margin: 0, lineHeight: '1.75', maxWidth: '420px' }}>
               Fill in your requirements and our sourcing experts will get back to you with the best possible quote.
             </p>
           </div>
-
-          <div className="rq-header-img" style={{ flexShrink: 0, position: 'relative', width: '320px', height: '180px' }}>
-            <img
-              src="/images/categories/shipping2.jpg"
-              alt=""
-              style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '14px', boxShadow: '0 8px 32px rgba(0,0,0,0.12)' }}
-            />
-            <div style={{ position: 'absolute', inset: 0, borderRadius: '14px', background: 'linear-gradient(to right, rgba(240,249,245,0.5), transparent)' }} />
-          </div>
         </div>
-      </div>
+      </section>
 
       {/* ── Body ────────────────────────────────────────────────── */}
       <div className="rq-body" style={{ maxWidth: '1280px', margin: '0 auto', padding: '36px 32px 60px', display: 'flex', gap: '28px', alignItems: 'flex-start' }}>
@@ -487,16 +487,6 @@ export default function RequestQuote() {
                 </span>
               </div>
             </div>
-
-            {/* Error message */}
-            {submitError && (
-              <div style={{ marginBottom: '16px', padding: '12px 16px', background: '#fef2f2', border: '1.5px solid #fecaca', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '1px' }}>
-                  <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
-                </svg>
-                <p style={{ margin: 0, fontSize: '13px', color: '#b91c1c', lineHeight: '1.5' }}>{submitError}</p>
-              </div>
-            )}
 
             {/* Submit */}
             <button
