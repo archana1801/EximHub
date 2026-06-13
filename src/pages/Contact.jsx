@@ -4,11 +4,11 @@ import { Link } from 'react-router-dom';
 // ── Styles defined up-front ────────────────────────────────────────────────
 const S = {
   page:    { background: '#f7f8fa', minHeight: '100vh' },
-  header:  { background: 'linear-gradient(135deg, #f0f9f5 0%, #e8f4ff 100%)', borderBottom: '1px solid #e5e7eb' },
-  headerInner: { maxWidth: '1280px', margin: '0 auto', padding: '36px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '24px' },
-  h1:      { fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: '800', color: '#0B1F3A', margin: '0 0 10px', lineHeight: '1.15' },
-  sub:     { fontSize: '15px', color: '#6b7280', margin: 0, lineHeight: '1.7', maxWidth: '420px' },
-  headerImg: { width: '280px', height: '160px', objectFit: 'cover', borderRadius: '14px', boxShadow: '0 8px 32px rgba(0,0,0,0.12)' },
+  header:  { background: '#0B1F3A', position: 'relative', overflow: 'hidden' },
+  headerInner: { maxWidth: '1280px', margin: '0 auto', padding: '44px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '24px', position: 'relative', zIndex: 1 },
+  h1:      { fontSize: 'clamp(24px, 3vw, 36px)', fontWeight: '800', color: '#fff', margin: '0 0 10px', lineHeight: '1.15' },
+  sub:     { fontSize: '15px', color: 'rgba(255,255,255,0.62)', margin: 0, lineHeight: '1.7', maxWidth: '420px' },
+  headerImg: { width: '280px', height: '180px', objectFit: 'cover', borderRadius: '14px', boxShadow: '0 8px 40px rgba(0,0,0,0.4)', opacity: 0.85 },
   body:    { maxWidth: '1280px', margin: '0 auto', padding: '36px 32px 60px', display: 'flex', gap: '28px', alignItems: 'flex-start' },
   card:    { flex: 1, background: '#fff', borderRadius: '16px', border: '1.5px solid #e5e7eb', boxShadow: '0 2px 16px rgba(0,0,0,0.05)', padding: '36px 32px' },
   cardTitle: { fontSize: '18px', fontWeight: '800', color: '#0B1F3A', margin: '0 0 6px' },
@@ -64,25 +64,29 @@ export default function Contact() {
 
       {/* Header */}
       <div style={S.header}>
+        {/* dot grid */}
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.045) 1px, transparent 1px)', backgroundSize: '22px 22px', pointerEvents: 'none', zIndex: 0 }} />
         <div style={S.headerInner} className="ct-header-inner">
           <div>
-            <nav style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '16px', fontSize: '13px', color: '#9ca3af' }}>
-              <Link to="/" style={{ color: '#9ca3af', textDecoration: 'none' }}>Home</Link>
+            <nav style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '16px', fontSize: '13px', color: 'rgba(255,255,255,0.45)' }}>
+              <Link to="/" style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'none' }}>Home</Link>
               <span>›</span>
-              <span style={{ color: '#0B1F3A', fontWeight: '500' }}>Contact Us</span>
+              <span style={{ color: 'rgba(255,255,255,0.85)', fontWeight: '500' }}>Contact Us</span>
             </nav>
             <h1 style={S.h1}>
               Get in <span style={{ color: '#1FA971' }}>Touch</span>
             </h1>
             <p style={S.sub}>Have a question or want to start sourcing? Send us a message and we'll get back to you.</p>
           </div>
-          <img
-            src="/images/categories/inquiry.jpg"
-            alt=""
-            style={S.headerImg}
-            className="ct-header-img"
-            onError={e => { e.target.style.display = 'none'; }}
-          />
+          <div className="ct-header-img" style={{ position: 'relative', flexShrink: 0 }}>
+            <div style={{ position: 'absolute', inset: 0, borderRadius: '14px', background: 'linear-gradient(to right, #0B1F3A 0%, transparent 40%)', zIndex: 1 }} />
+            <img
+              src="/images/categories/inquiry.jpg"
+              alt=""
+              style={S.headerImg}
+              onError={e => { e.target.style.display = 'none'; }}
+            />
+          </div>
         </div>
       </div>
 

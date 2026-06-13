@@ -78,10 +78,10 @@ const features = [
 export default function Quality() {
   return (
     <section style={S.section} className="wc-section">
-      <div style={S.container}>
+      <div style={S.container} className="wc-layout">
 
         {/* left: heading */}
-        <div style={S.left}>
+        <div style={S.left} className="wc-left">
           <h2 style={S.title}>
             Why Importers<br />
             <span style={S.titleGreen}>Choose Us?</span>
@@ -131,16 +131,17 @@ export default function Quality() {
           box-shadow: 0 6px 20px rgba(31,169,113,0.15) !important;
         }
         @media (max-width: 960px) {
-          .wc-layout { flex-direction: column !important; }
-          .wc-left   { max-width: 100% !important; }
-          .wc-grid   { grid-template-columns: repeat(3, 1fr); }
+          .wc-layout { flex-direction: column !important; gap: 32px !important; }
+          .wc-left   { width: 100% !important; max-width: 100% !important; }
+          .wc-grid   { grid-template-columns: repeat(3, 1fr) !important; }
+          .wc-section { padding: 52px 32px !important; }
         }
         @media (max-width: 600px) {
-          .wc-grid { grid-template-columns: repeat(2, 1fr); }
+          .wc-grid { grid-template-columns: repeat(2, 1fr) !important; }
           .wc-section { padding: 52px 20px !important; }
         }
         @media (max-width: 480px) {
-          .wc-grid { grid-template-columns: 1fr; }
+          .wc-grid { grid-template-columns: 1fr !important; }
           .wc-section { padding: 40px 16px !important; }
         }
       `}</style>

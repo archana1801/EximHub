@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { PRODUCTS } from '../data/products';
 
+const ACCESS_KEY = '5c8087d3-a4f1-4444-a116-2d0cc47f79d2';
+
 // ── Static data ────────────────────────────────────────────────────────────
 const PACKAGING_TYPES = [
   'Bulk Packaging',
@@ -97,6 +99,10 @@ export default function RequestQuote() {
   const preselected = pid ? PRODUCTS.find(p => p.id === parseInt(pid, 10)) : null;
 
   const [form, setForm] = useState({
+    companyName:    '',
+    contactPerson:  '',
+    email:          '',
+    phone:          '',
     product:        preselected?.name || '',
     specs:          '',
     packagingType:  '',
@@ -107,23 +113,69 @@ export default function RequestQuote() {
     additionalInfo: '',
   });
 
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted]       = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError]   = useState('');
+
   const set = key => e => setForm(f => ({ ...f, [key]: e.target.value }));
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    const subject = `Quote Request – ${form.product}`;
-    const body = [
-      `Product: ${form.product}`,
-      `Specifications: ${form.specs}`,
-      `Packaging Type: ${form.packagingType}`,
-      `Product Type: ${form.productType}`,
-      `Target Rate: ${form.currency} ${form.targetRate || 'TBD'} per ${form.unit || 'unit'}`,
-      `Additional Info: ${form.additionalInfo || 'N/A'}`,
-    ].join('\n\n');
+  const INITIAL_FORM = {
+    companyName:    '',
+    contactPerson:  '',
+    email:          '',
+    phone:          '',
+    product:        preselected?.name || '',
+    specs:          '',
+    packagingType:  '',
+    productType:    'Regular',
+    currency:       'USD ($)',
+    targetRate:     '',
+    unit:           '',
+    additionalInfo: '',
+  };
 
-    window.location.href = `mailto:info@importwiz.shop?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setSubmitted(true);
+  const handleSubmit = async e => {
+    e.preventDefault();
+    setSubmitError('');
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key:               ACCESS_KEY,
+          subject:                  'New Quote Request',
+          from_name:                `${form.contactPerson} - ${form.companyName}`,
+          replyto:                  form.email,
+          'Company Name':           form.companyName,
+          'Contact Person':         form.contactPerson,
+          'Email':                  form.email,
+          'Phone / WhatsApp':       form.phone,
+          'Product':                form.product,
+          'Desired Specifications': form.specs,
+          'Packaging Type':         form.packagingType,
+          'Product Type':           form.productType,
+          'Currency':               form.currency,
+          'Target Rate':            form.targetRate || 'TBD',
+          'Unit':                   form.unit || 'N/A',
+          'Additional Information': form.additionalInfo || 'N/A',
+        }),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setForm(INITIAL_FORM);
+        setSubmitted(true);
+      } else {
+        setSubmitError(result.message || 'Submission failed. Please try again.');
+      }
+    } catch {
+      setSubmitError('Something went wrong. Please check your connection and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -180,15 +232,13 @@ export default function RequestQuote() {
       <div style={{ background: 'linear-gradient(135deg, #f0f9f5 0%, #e8f4ff 100%)', borderBottom: '1px solid #e5e7eb', overflow: 'hidden' }}>
         <div className="rq-header-inner" style={{ maxWidth: '1280px', margin: '0 auto', padding: '36px 32px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '24px' }}>
           <div style={{ flex: 1 }}>
-            {/* Breadcrumb */}
             <nav style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '18px', fontSize: '13px', color: '#9ca3af' }}>
-              <Link to="/" style={{ color: '#9ca3af', textDecoration: 'none' }}>Home</Link>
+              <Link to="/" style={{ color: '#9ca3af' }}>Home</Link>
               <span>›</span>
-              <Link to="/products" style={{ color: '#9ca3af', textDecoration: 'none' }}>Products</Link>
+              <Link to="/products" style={{ color: '#9ca3af' }}>Products</Link>
               <span>›</span>
               <span style={{ color: '#0B1F3A', fontWeight: '500' }}>Request Quote</span>
             </nav>
-
             <h1 style={{ fontSize: 'clamp(26px, 3vw, 38px)', fontWeight: '800', color: '#0B1F3A', margin: '0 0 12px', lineHeight: '1.15' }}>
               Request a{' '}
               <span style={{ color: '#1FA971' }}>Quote</span>
@@ -198,7 +248,6 @@ export default function RequestQuote() {
             </p>
           </div>
 
-          {/* Header illustration */}
           <div className="rq-header-img" style={{ flexShrink: 0, position: 'relative', width: '320px', height: '180px' }}>
             <img
               src="/images/categories/shipping2.jpg"
@@ -216,6 +265,70 @@ export default function RequestQuote() {
         {/* ── Form card ─────────────────────────────────────────── */}
         <div className="rq-form-card" style={{ flex: 1, background: '#fff', borderRadius: '16px', border: '1.5px solid #e5e7eb', boxShadow: '0 2px 16px rgba(0,0,0,0.05)', padding: '36px 32px' }}>
           <form onSubmit={handleSubmit}>
+
+            {/* ── Contact Details ── */}
+            <div style={{ marginBottom: '32px', paddingBottom: '28px', borderBottom: '1px solid #f3f4f6' }}>
+              <p style={{ fontSize: '12px', fontWeight: '700', letterSpacing: '2px', color: '#1FA971', textTransform: 'uppercase', margin: '0 0 20px' }}>Contact Details</p>
+
+              {/* Company Name + Contact Person */}
+              <div className="rq-name-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
+                <div>
+                  <p style={label}>Company Name <span style={required}>*</span></p>
+                  <input
+                    className="rq-input"
+                    required
+                    type="text"
+                    placeholder="Your company name"
+                    value={form.companyName}
+                    onChange={set('companyName')}
+                    style={field}
+                  />
+                </div>
+                <div>
+                  <p style={label}>Contact Person <span style={required}>*</span></p>
+                  <input
+                    className="rq-input"
+                    required
+                    type="text"
+                    placeholder="Your full name"
+                    value={form.contactPerson}
+                    onChange={set('contactPerson')}
+                    style={field}
+                  />
+                </div>
+              </div>
+
+              {/* Email + Phone */}
+              <div className="rq-name-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                <div>
+                  <p style={label}>Email <span style={required}>*</span></p>
+                  <input
+                    className="rq-input"
+                    required
+                    type="email"
+                    placeholder="you@company.com"
+                    value={form.email}
+                    onChange={set('email')}
+                    style={field}
+                  />
+                </div>
+                <div>
+                  <p style={label}>Phone / WhatsApp <span style={required}>*</span></p>
+                  <input
+                    className="rq-input"
+                    required
+                    type="tel"
+                    placeholder="+1 234 567 8900"
+                    value={form.phone}
+                    onChange={set('phone')}
+                    style={field}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* ── Product Details ── */}
+            <p style={{ fontSize: '12px', fontWeight: '700', letterSpacing: '2px', color: '#1FA971', textTransform: 'uppercase', margin: '0 0 20px' }}>Product Details</p>
 
             {/* 1. Product */}
             <div style={{ marginBottom: '28px' }}>
@@ -375,24 +488,49 @@ export default function RequestQuote() {
               </div>
             </div>
 
+            {/* Error message */}
+            {submitError && (
+              <div style={{ marginBottom: '16px', padding: '12px 16px', background: '#fef2f2', border: '1.5px solid #fecaca', borderRadius: '8px', display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '1px' }}>
+                  <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+                <p style={{ margin: 0, fontSize: '13px', color: '#b91c1c', lineHeight: '1.5' }}>{submitError}</p>
+              </div>
+            )}
+
             {/* Submit */}
             <button
               type="submit"
+              disabled={isSubmitting}
               style={{
                 width: '100%', padding: '14px', borderRadius: '9px',
-                background: '#1FA971', border: 'none', color: '#fff',
-                fontSize: '15px', fontWeight: '700', cursor: 'pointer',
+                background: isSubmitting ? '#6b7280' : '#1FA971',
+                border: 'none', color: '#fff',
+                fontSize: '15px', fontWeight: '700', cursor: isSubmitting ? 'not-allowed' : 'pointer',
                 fontFamily: 'inherit', display: 'flex', alignItems: 'center',
                 justifyContent: 'center', gap: '10px', letterSpacing: '0.2px',
+                transition: 'background 0.15s',
               }}
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" />
-              </svg>
-              Submit Request
+              {isSubmitting ? (
+                <>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ animation: 'spin 1s linear infinite' }}>
+                    <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                  </svg>
+                  Submitting...
+                </>
+              ) : (
+                <>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="22" y1="2" x2="11" y2="13" /><polygon points="22 2 15 22 11 13 2 9 22 2" />
+                  </svg>
+                  Submit Request
+                </>
+              )}
             </button>
 
-            {/* Security note */}
+            <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+
             <p style={{ textAlign: 'center', fontSize: '12px', color: '#9ca3af', marginTop: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '5px' }}>
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2" /><path d="M7 11V7a5 5 0 0 1 10 0v4" />
@@ -410,7 +548,7 @@ export default function RequestQuote() {
           <div style={{ background: '#fff', borderRadius: '14px', border: '1.5px solid #e5e7eb', boxShadow: '0 2px 12px rgba(0,0,0,0.05)', padding: '24px' }}>
             <h3 style={{ margin: '0 0 6px', fontSize: '16px', fontWeight: '800', color: '#0B1F3A' }}>Why Request a Quote?</h3>
             <div style={{ width: '32px', height: '3px', background: '#1FA971', borderRadius: '2px', marginBottom: '20px' }} />
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
+            <div className="rq-why-items" style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
               {WHY_ITEMS.map(item => (
                 <div key={item.title} style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
                   <div style={{
@@ -436,12 +574,10 @@ export default function RequestQuote() {
             <p style={{ margin: '0 0 18px', fontSize: '13px', color: '#6b7280', lineHeight: '1.6' }}>
               Our sourcing experts are ready to assist you.
             </p>
-
             <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-              {/* Email */}
               <a
                 href="mailto:info@importwiz.shop"
-                style={{ display: 'flex', gap: '12px', alignItems: 'flex-start', textDecoration: 'none' }}
+                style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}
               >
                 <div style={{ width: '36px', height: '36px', borderRadius: '8px', background: '#f0fdf8', border: '1px solid #bbf7d0', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1FA971" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -452,7 +588,6 @@ export default function RequestQuote() {
                   <p style={{ margin: '0 0 2px', fontSize: '13.5px', fontWeight: '700', color: '#0B1F3A' }}>info@importwiz.shop</p>
                 </div>
               </a>
-
             </div>
           </div>
 

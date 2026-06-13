@@ -60,7 +60,7 @@ export default function Shipping() {
       <div style={S.orbLeft}  aria-hidden="true" />
       <div style={S.orbRight} aria-hidden="true" />
 
-      <div style={S.container}>
+      <div style={S.container} className="sh-container">
 
         {/* LEFT: title */}
         <div style={S.titleBlock}>
@@ -72,7 +72,7 @@ export default function Shipping() {
         </div>
 
         {/* MIDDLE: 5 service items */}
-        <div style={S.servicesRow}>
+        <div style={S.servicesRow} className="sh-services">
           {services.map((s, i) => (
             <div key={i} className="sh-item" style={S.serviceItem}>
               <div style={S.serviceIcon}>{s.icon}</div>
@@ -83,7 +83,7 @@ export default function Shipping() {
         </div>
 
         {/* RIGHT: globe image */}
-        <div style={S.imageBlock}>
+        <div style={S.imageBlock} className="sh-image">
           <img
             src="/images/categories/shipping.png"
             alt="Global shipping network"
@@ -108,17 +108,21 @@ export default function Shipping() {
           box-shadow: 0 40px 100px rgba(0,0,0,0.7), 0 0 0 1px rgba(31,169,113,0.5), 30px 30px 80px rgba(0,0,0,0.5) !important;
         }
         @media (max-width: 1100px) {
-          .sh-container { flex-wrap: wrap !important; }
-          .sh-services  { grid-template-columns: repeat(3, 1fr) !important; }
+          .sh-container { grid-template-columns: 180px 1fr !important; }
           .sh-image     { display: none !important; }
+          .sh-services  { grid-template-columns: repeat(3, 1fr) !important; }
+        }
+        @media (max-width: 768px) {
+          .sh-container { grid-template-columns: 1fr !important; }
+          .sh-services  { grid-template-columns: repeat(3, 1fr) !important; }
+          .sh-section   { padding: 52px 20px !important; }
         }
         @media (max-width: 640px) {
           .sh-services { grid-template-columns: repeat(2, 1fr) !important; }
-          .sh-section { padding: 52px 20px !important; }
         }
         @media (max-width: 480px) {
           .sh-services { grid-template-columns: 1fr !important; }
-          .sh-section { padding: 40px 16px !important; }
+          .sh-section  { padding: 40px 16px !important; }
         }
       `}</style>
     </section>
