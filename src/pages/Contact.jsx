@@ -265,10 +265,6 @@ export default function Contact() {
             <div>
               <p style={S.infoLabel}>Address</p>
               <address style={{ fontStyle: 'normal', fontSize: '14px', color: '#374151', lineHeight: '1.75', fontWeight: '500' }}>
-                <strong style={{ color: '#0B1F3A' }}>India:</strong><br />
-                26 A/1C, Shivkuti, Teliarganj,<br />
-                Prayagraj, India<br />
-                <br />
                 <strong style={{ color: '#0B1F3A' }}>Tanzania:</strong><br />
                 AMI Building, Samora/Mkwépu St.,<br />
                 Dar es Salaam
