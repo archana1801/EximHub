@@ -1,19 +1,19 @@
 import { Link } from "react-router-dom";
 
 const categories = [
-  { id: 1, name: "Agro Products",       count: "120+", img: "/images/categories/agro.jpg"       },
-  { id: 2, name: "Spices",              count: "90+",  img: "/images/categories/spices.jpg"      },
-  { id: 3, name: "Grains & Pulses",     count: "75+",  img: "/images/categories/grains.jpg"      },
-  { id: 4, name: "Leather Goods",       count: "60+",  img: "/images/categories/leather.jpg"     },
-  { id: 5, name: "Organic Products",    count: "50+",  img: "/images/categories/organic.jpg"     },
-  { id: 6, name: "Industrial Products", count: "100+", img: "/images/categories/industrial.jpg"  },
-  { id: 7, name: "Chemicals",           count: "80+",  img: "/images/categories/chemicals.jpg"   },
-  { id: 8, name: "Consumer Goods",      count: "150+", img: "/images/categories/consumer.jpg"    },
+  { id: 1, name: "Industrial Products", count: "100+", img: "/images/categories/industrial.jpg"  },
+  { id: 2, name: "Gems & Jewellery",    count: "60+",  img: "/images/categories/james.png"        },
+  { id: 3, name: "Construction",        count: "80+",  img: "/images/categories/construction.jpg" },
+  { id: 4, name: "Carpet & Rugs",       count: "50+",  img: "/images/categories/carpet.jpg"       },
+  { id: 5, name: "Toys",               count: "70+",  img: "/images/categories/toy.png"           },
+  { id: 6, name: "Agro Products",       count: "120+", img: "/images/categories/agro.jpg"         },
+  { id: 7, name: "Spices",              count: "90+",  img: "/images/categories/spices.jpg"       },
+  { id: 8, name: "Grains & Pulses",     count: "75+",  img: "/images/categories/grains.jpg"       },
 ];
 
 export default function ProductCategories() {
   return (
-    <section style={S.section}>
+    <section style={S.section} className="pc-section">
       <div style={S.container}>
 
         {/* heading */}
@@ -89,6 +89,10 @@ export default function ProductCategories() {
         }
         @media (max-width: 480px) {
           .pc-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+          .pc-section { padding: 40px 16px !important; }
+        }
+        @media (max-width: 768px) {
+          .pc-section { padding: 52px 20px !important; }
         }
       `}</style>
     </section>

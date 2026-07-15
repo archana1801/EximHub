@@ -32,7 +32,7 @@ export default function Navbar() {
   return (
     <>
       <nav style={{ ...S.nav, ...(scrolled ? S.navScrolled : {}) }}>
-        <div style={S.inner}>
+        <div style={S.inner} className="nb-inner">
           
           {/* LOGO */}
           <Link to="/" style={S.logo}>
@@ -62,7 +62,7 @@ export default function Navbar() {
                       ? "#1FA971"
                       : hoveredLink === l.to
                       ? "#1FA971"
-                      : "rgba(200,220,255,0.75)",
+                      : "rgba(13,27,42,0.55)",
                   }}
                   onMouseEnter={() => setHoveredLink(l.to)}
                   onMouseLeave={() => setHoveredLink(null)}
@@ -106,7 +106,7 @@ export default function Navbar() {
                   to={l.to}
                   style={{
                     ...S.mobileLink,
-                    color: active ? "#1FA971" : "#ccc",
+                    color: active ? "#1FA971" : "rgba(13,27,42,0.55)",
                   }}
                 >
                   {l.label}
@@ -147,6 +147,9 @@ export default function Navbar() {
           .nb-desktop-links { display: none !important; }
           .nb-cta { display: none !important; }
         }
+        @media (max-width: 480px) {
+          .nb-inner { padding: 0 16px !important; }
+        }
       `}</style>
     </>
   );
@@ -157,15 +160,14 @@ const S = {
     position: "sticky",
     top: 0,
     zIndex: 999,
-    background: "rgba(11,31,58,0.92)",
-    backdropFilter: "blur(14px)",
-    borderBottom: "1px solid rgba(255,255,255,0.06)",
+    background: "#F5F7FA",
+    borderBottom: "1px solid rgba(13,27,42,0.08)",
   },
 
   navScrolled: {
-    background: "rgba(11,31,58,0.97)",
-    boxShadow: "0 6px 30px rgba(0,0,0,0.35)",
-    borderBottom: "1px solid rgba(31,169,113,0.15)",
+    background: "#EEF1F5",
+    boxShadow: "0 4px 20px rgba(13,27,42,0.08)",
+    borderBottom: "1px solid rgba(13,27,42,0.12)",
   },
 
   inner: {
@@ -190,6 +192,7 @@ const S = {
     height: "34px",
     borderRadius: "8px",
     background: "rgba(31,169,113,0.1)",
+    border: "1px solid rgba(31,169,113,0.2)",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -198,7 +201,7 @@ const S = {
   logoText: {
     fontSize: "18px",
     fontWeight: "800",
-    color: "#E8F4FF",
+    color: "#0D1B2A",
   },
 
   logoAccent: {
@@ -248,11 +251,11 @@ const S = {
   },
 
   hamburger: {
-    background: "rgba(255,255,255,0.1)",
+    background: "rgba(13,27,42,0.06)",
     border: "none",
     padding: "8px",
     borderRadius: "6px",
-    color: "#fff",
+    color: "#0D1B2A",
     cursor: "pointer",
   },
 
@@ -260,7 +263,8 @@ const S = {
     display: "flex",
     flexDirection: "column",
     padding: "10px 20px",
-    background: "#0B1F3A",
+    background: "#EEF1F5",
+    borderTop: "1px solid rgba(13,27,42,0.08)",
   },
 
   mobileLink: {

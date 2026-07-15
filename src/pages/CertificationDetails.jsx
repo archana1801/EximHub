@@ -189,8 +189,8 @@ export default function CertificationDetails() {
     <main style={S.main}>
 
       {/* ── HERO ── */}
-      <section style={S.hero}>
-        <div style={S.heroInner}>
+      <section style={S.hero} className="cd-hero">
+        <div style={S.heroInner} className="cd-hero-inner">
 
           {/* Breadcrumb */}
           <nav style={S.breadcrumb}>
@@ -226,8 +226,8 @@ export default function CertificationDetails() {
       </section>
 
       {/* ── CONTENT (image + description) ── */}
-      <section style={S.contentSection}>
-        <div style={S.container}>
+      <section style={S.contentSection} className="cd-content-section">
+        <div style={S.container} className="cd-container">
           <div className="cd-grid" style={S.contentGrid}>
 
             {/* Left — Image */}
@@ -272,8 +272,8 @@ export default function CertificationDetails() {
       </section>
 
       {/* ── BENEFITS ── */}
-      <section style={S.benefitsSection}>
-        <div style={S.container}>
+      <section style={S.benefitsSection} className="cd-benefits-section">
+        <div style={S.container} className="cd-container">
           <div style={S.benefitsHead}>
             <p style={{ ...S.benefitsEyebrow, color: cert.color }}>Key Benefits</p>
             <h2 style={S.benefitsTitle}>Why This Matters for Your Business</h2>
@@ -295,7 +295,7 @@ export default function CertificationDetails() {
       </section>
 
       {/* ── CTA ── */}
-      <section style={S.cta}>
+      <section style={S.cta} className="cd-cta">
         <div style={S.ctaInner}>
           <p style={S.ctaEyebrow}>Ready to Import?</p>
           <h2 style={S.ctaTitle}>
@@ -353,6 +353,20 @@ export default function CertificationDetails() {
 
         @media (max-width: 860px) {
           .cd-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+        }
+        @media (max-width: 768px) {
+          .cd-hero { padding: 48px 20px 56px !important; }
+          .cd-container { padding: 0 20px !important; max-width: 100% !important; }
+          .cd-content-section { padding: 48px 20px !important; }
+          .cd-benefits-section { padding: 48px 20px !important; }
+          .cd-cta { padding: 64px 20px !important; }
+        }
+        @media (max-width: 480px) {
+          .cd-hero { padding: 36px 16px 44px !important; }
+          .cd-container { padding: 0 16px !important; }
+          .cd-content-section { padding: 40px 16px !important; }
+          .cd-benefits-section { padding: 40px 16px !important; }
+          .cd-cta { padding: 52px 16px !important; }
         }
       `}</style>
     </main>

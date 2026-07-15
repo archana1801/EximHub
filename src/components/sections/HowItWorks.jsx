@@ -105,7 +105,7 @@ const Pin = () => (
 
 export default function HowItWorks() {
   return (
-    <section style={S.section}>
+    <section style={S.section} className="hiw-section">
 
       {/* dot grid background */}
       <div style={S.dotGrid} aria-hidden="true" />
@@ -136,7 +136,7 @@ export default function HowItWorks() {
         </div>
 
         {/* ── steps row ── */}
-        <div style={S.stepsRow}>
+        <div style={S.stepsRow} className="hiw-steps">
           {steps.map((step, i) => (
             <div key={i} style={S.stepWrapper}>
 
@@ -169,7 +169,7 @@ export default function HowItWorks() {
 
               {/* arrow between cards */}
               {i < steps.length - 1 && (
-                <div style={S.arrowWrap}>
+                <div style={S.arrowWrap} className="hiw-arrow">
                   <svg viewBox="0 0 24 24" fill="none" stroke="#1FA971" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
                     <line x1="5" y1="12" x2="19" y2="12" />
                     <polyline points="12 5 19 12 12 19" />
@@ -182,7 +182,7 @@ export default function HowItWorks() {
         </div>
 
         {/* ── trust bar ── */}
-        <div style={S.trustBar}>
+        <div style={S.trustBar} className="hiw-trust">
           {trustItems.map((t, i) => (
             <div key={i} style={S.trustItem}>
               <div style={S.trustIcon}>{t.icon}</div>
@@ -207,6 +207,19 @@ export default function HowItWorks() {
         }
         .hiw-card:hover img {
           transform: scale(1.05);
+        }
+        @media (max-width: 900px) {
+          .hiw-steps  { display: grid !important; grid-template-columns: repeat(2, 1fr) !important; gap: 20px !important; }
+          .hiw-arrow  { display: none !important; }
+          .hiw-trust  { flex-wrap: wrap !important; }
+          .hiw-section { padding: 52px 20px !important; }
+        }
+        @media (max-width: 580px) {
+          .hiw-steps { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 480px) {
+          .hiw-trust  { flex-direction: column !important; }
+          .hiw-section { padding: 40px 16px !important; }
         }
       `}</style>
     </section>
