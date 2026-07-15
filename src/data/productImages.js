@@ -318,4 +318,12 @@ export const PRODUCT_IMAGES = {
   'drilling-starch':               '/images/products/drilling-starch.jpg',
   'drilling-detergent':            '/images/products/drilling-detergent.jpg',
   'primary-emulsifier':            '/images/products/primary-emulsifier.jpg',
+  'secondary-emulsifier':          '/images/products/secondary-emulsifier.jpg',
+  'corrosion-inhibitor':           '/images/products/corrosion-inhibitor.jpg',
+  'detergent-starch-ht':           '/images/products/detergent-starch-ht.jpg',
+  'silicon-based-deformer':        '/images/products/silicon-based-deformer.jpg',
+  'spotting-fluid-weighted':       '/images/products/spotting-fluid-weighted.jpg',
+  'ring-wash':                     '/images/products/ring-wash.jpg',
+  'hematite-iron-oxide':           '/images/products/hematite-iron-oxide.jpg',
+  'polymer-deflocculants':         '/images/products/polymer-deflocculants.jpg',
 };
